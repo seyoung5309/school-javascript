@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- id : JS에서 제어하기 위해 부여 -->
+    숫자 1 <input type="number" id="n1" /> <br />
+    숫자 2 <input type="number" id="n2" /> <br />
+    <button onclick="doSum()">계산</button>
+
+    <p>결과 : <span id="result"></span></p>
+
+    <script>
+      // 과제
+      let n1 = document.getElementById("n1");
+      let n2 = document.getElementById("n2");
+
+      function doSum(n1, n2) {
+        console.log(n1, n2);
+        return n1 + n2;
+      }
+
+      //   const doSum() => {
+
+      //   }
+
+      let num = 67978;
+      console.log(num);
+
+      // 1. toString() : 숫자 -> 문자열
+      let strNum = num.toString();
+      console.log(strNum);
+
+      // 2. perseInt() : 문자열 -> 정수, 전역 함수(주인:Windows(전역 객체))
+      let strInt = parseInt(strNum);
+      console.log(strInt);
+
+      // 3. parseFloat() : 문자열 -> 실수
+      let pi = "3.141592";
+      let strFlo = parseFloat(pi);
+      console.log(strFlo);
+
+      // 4. toExponential() : 지수표기법
+      let x = 100.3456;
+      console.log(x, x.toExponential());
+
+      // 5. toFixed() : 소수점 몇째 자리까지 보여줄지 결정하는 함수 (반올림)
+      console.log(x.toFixed(0)); // 100
+      console.log(x.toFixed(1)); // 100.3
+      console.log(x.toFixed(2)); // 100.35
+      console.log(x.toFixed(3)); // 100.346
+
+      console.log(strFlo.toFixed(2));
+
+      console.log("\n");
+
+      // 6. toPrecision() : 정수와 소수 부분을 합쳐서 몇 자리 보여줄지 결정하는 함수
+      //   console.log(x.toPrecision(0)); // 100
+      console.log(x.toPrecision(1));
+      console.log(x.toPrecision(2));
+      console.log(x.toPrecision(3));
+      console.log(x.toPrecision(4));
+      console.log(x.toPrecision(5));
+    </script>
+  </body>
+</html>
+
+<!-- span이라는 태그가 있으며, 인라인을 포함한다? -->
