@@ -62,17 +62,30 @@
 
   ④ toPrecision() : //실무에서 거의 사용하지 않는다.
 
-  ⑤ parseInt() :
+  ⑤ parseInt() : 문자열을 정수로 바꿈
 
   //전역함수이므로 문자열.parseInt( ) 가 아니라 parseInt(문자열)로 작성한다.
 
-  ⑥ parseFloat() :
+  ⑥ parseFloat() : 문자열을 실수로 바꿈
 
   ⑦ 부동소수점의 최대숫자, 최소 숫자 확인
 
   console.log(Number.MAX_SAFE_INTEGER); //9007199254740991
 
   console.log(Number.MIN_SAFE_INTEGER); //-9007199254740991
+  - input 태그: 사용자로부터 입력을 받는 태그, type속성
+  - label 태그 : 설명
+  - id 속성 : 고유
+  - span, p(<div>) 태그 :
+  - document.getElementById() :
+  - innerHTML :
+  - 이벤트(onclick), 이벤트 핸들러(doSum() 함수) :
+  1. 특정 클래스 내부나 객체 내에 정의되지 않고 스크립트 전체 어디에서나 직접 호출이 가능한 함수를 의미한다.
+  2. 브라우저 환경에서는 window에, node.js 환경에서는 global 객체에 소속되어 있다.
+  3. 실무에서 많이 사용하는 주요 전역 함수
+  - eval() : 문자열로 된 JS 코드 실행
+  - isFinite() : 값이 유효한 숫자인지 확인
+  - isNaN() : 값이 not a number인지 확인
 
 ---
 
