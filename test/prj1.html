@@ -4,51 +4,240 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>미림 카페 주문 관리</title>
+    <style>
+        button,
+        select {
+            cursor: pointer;
+        }
+
+        body {
+            justify-self: center;
+            width: 402px;
+            height: 874px;
+            font-family: Pretendard;
+        }
+
+        table {
+            border: 1px solid black;
+            width: 300px;
+        }
+
+        h1 {
+            justify-self: center;
+            background-color: #deedf8;
+        }
+
+        h2 {
+            justify-self: center;
+        }
+
+        table {
+            justify-self: center;
+            width: 100%
+        }
+
+        td {
+            border: 1px solid black;
+        }
+
+        th {
+            border: 1px solid black;
+            background-color: #deedf8;
+        }
+
+        hr {
+            margin: 30px 0 30px 0;
+        }
+
+        .box0 {
+            width: 100%;
+            height: 45px;
+            border-radius: 10px;
+            border: 1px solid black;
+            background: #FFF;
+            padding-left: 10px;
+        }
+
+        .box1 {
+            width: 307px;
+            height: 45px;
+            border-radius: 10px;
+            border: 1px solid black;
+            background: #FFF;
+            padding-left: 10px;
+        }
+
+        .box2 {
+            width: 75px;
+            height: 45px;
+            border-radius: 10px;
+            border: 1px solid black;
+            background: #FFF;
+            background-color: #deedf8;
+        }
+    </style>
 </head>
 
 <body>
     <h1>미림 카페 주문 관리</h1>
 
-    <h2>메뉴 선택</h2>
-    <label>메뉴</label>
-    <select></select>
-    <br>
-    <label>수량</label>
-    <input>
-    <br>
-    <button>주문 추가</button>
+    <hr>
+
+    <div>
+        <div>
+            <h2>메뉴 선택</h2>
+            <label>메뉴</label><br>
+            <select id="menuSelect" class="box0"></select>
+            <br>
+            <label>수량</label><br>
+            <input id="menuCount" type="number" class="box1">
+            <button onclick="orderInput()" class="box2">주문 추가</button>
+        </div>
+
+        <hr>
+
+        <div>
+            <h2>메뉴 검색</h2>
+            <input id="searchInput" placeholder="메뉴명을 입력하세요." class="box1">
+            <button onclick="search()" class="box2">검색</button>
+            <br>
+            <label id="searchResult">검색 결과가 여기에 표시됩니다.</label>
+        </div>
+    </div>
+
+    <hr>
+
+    <div>
+        <h2>주문 내역</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>주문번호</th>
+                    <th>메뉴명</th>
+                    <th>단가</th>
+                    <th>수량</th>
+                    <th>금액</th>
+                </tr>
+            </thead>
+            <tbody id="orderList">
+                <tr>
+                    <td colspan="5" style="text-align: center;">주문 내역이 없습니다.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <hr>
+
+    <div>
+        <h2>결제 정보</h2>
+        <label>총 주문 수량:</label>
+        <label id="orderAll">0</label>
+        <label>개</label>
+
+        <br>
+
+        <label>총 결제 금액</label>
+        <label id="priceAll">0</label>
+        <label>원</label>
+    </div>
 
 
-    <h2>메뉴 검색</h2>
-    <input>
-    <button>검색</button>
-    <br>
-    <label>검색 결과가 여기에 표시됩니다.</label>
+    <script>
+        // Select에 메뉴 불러오기 (기능 완료) 
+        const menuList = () => {
+            const menuList = [
+                { name: "아메리카노", price: 3000, category: "coffee" },
+                { name: "카페라떼", price: 4000, category: "coffee" },
+                { name: "바닐라라떼", price: 4500, category: "coffee" },
+                { name: "초코라떼", price: 4200, category: "nonCoffee" },
+                { name: "레몬에이드", price: 5000, category: "ade" },
+                { name: "자몽에이드", price: 5200, category: "ade" },
+            ];
+            let result = [];
+            for (let m of menuList) {
+                result.push(`<option>${m.name} : ${m.price}원</option>`);
+            }
+            console.log(result);
+            document.getElementById("menuSelect").innerHTML = result.join("");
+        }
 
-    <h2>주문 내역</h2>
-    <table>
-        <tr>
-            <th>주문번호</th>
-            <th>메뉴명</th>
-            <th>단가</th>
-            <th>수량</th>
-            <th>금액</th>
-        </tr>
-    </table>
+        // 주문 검색하기 (기능 완료) 
+        const search = () => {
+            const menuList = [
+                { name: "아메리카노", price: 3000, category: "coffee" },
+                { name: "카페라떼", price: 4000, category: "coffee" },
+                { name: "바닐라라떼", price: 4500, category: "coffee" },
+                { name: "초코라떼", price: 4200, category: "nonCoffee" },
+                { name: "레몬에이드", price: 5000, category: "ade" },
+                { name: "자몽에이드", price: 5200, category: "ade" },
+            ];
+            let input = document.getElementById("searchInput").value;
+            let result = ""
+            let check = true;
+            for (let m of menuList) {
+                if (m.name.indexOf(input) > -1) {
+                    result += `메뉴명 : ${m.name} | 가격 : ${m.price} | 카테고리 : ${m.category}<br>`;
+                    check = false;
+                }
+            }
+            if (check) {
+                result = "검색 결과가 없습니다.";
+            }
+            if (input == '') {
+                result = "검색어가 없습니다.";
+            }
+            document.getElementById("searchResult").innerHTML = result;
 
-    <h2>결제 정보</h2>
-    <label>총 주문 수량:</label>
-    <label>0</label>
-    <label>개</label>
+        }
 
-    <br>
+        // 주문 추가하기 (기능 완료)
+        const orderInput = () => {
+            const menuList = [
+                { name: "아메리카노", price: 3000, category: "coffee" },
+                { name: "카페라떼", price: 4000, category: "coffee" },
+                { name: "바닐라라떼", price: 4500, category: "coffee" },
+                { name: "초코라떼", price: 4200, category: "nonCoffee" },
+                { name: "레몬에이드", price: 5000, category: "ade" },
+                { name: "자몽에이드", price: 5200, category: "ade" },
+            ];
 
-    <label>총 결제 금액</label>
-    <label>0</label>
-    <label>원</label>
+            let name = (document.getElementById("menuSelect").value.split(" "))[0];
+            let count = Number(document.getElementById("menuCount").value);
+            let table = document.getElementById("orderList").innerHTML;
+            let tableLength = table.split("</tr>").length;
 
-    <script></script>
+            if (table.indexOf("주문 내역이 없습니다.") > -1) {
+                table = "";
+                tableLength = 1;
+            }
+
+            if (count === 0) {
+                console.log("수량이 없습니다");
+                return -1;
+            }
+
+            let order = [];
+            let priceAll = 0;
+            for (let m of menuList) {
+                if (m.name === name) {
+                    order.push(`<tr><td>${tableLength}</td><td>${m.name}</td><td>${m.price}</td><td>${count}</td><td>${m.price * count}</td></tr>`);
+                    priceAll = m.price * count;
+                    break;
+                }
+            }
+
+            table += order;
+            console.log(order);
+            document.getElementById("orderList").innerHTML = table;
+
+            document.getElementById("orderAll").innerText = +(document.getElementById("orderAll").innerText) + count;
+            document.getElementById("priceAll").innerText = +(document.getElementById("priceAll").innerText) + priceAll;
+        }
+
+        menuList();
+    </script>
 </body>
 
 </html>
