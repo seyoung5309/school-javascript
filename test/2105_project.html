@@ -144,16 +144,16 @@
     </section>
 
     <script>
+        const menuList = [
+            { name: "아메리카노", price: 3000, category: "coffee" },
+            { name: "카페라떼", price: 4000, category: "coffee" },
+            { name: "바닐라라떼", price: 4500, category: "coffee" },
+            { name: "초코라떼", price: 4200, category: "nonCoffee" },
+            { name: "레몬에이드", price: 5000, category: "ade" },
+            { name: "자몽에이드", price: 5200, category: "ade" },
+        ];
         // Select에 메뉴 불러오기 (기능 완료) 
-        const menuList = () => {
-            const menuList = [
-                { name: "아메리카노", price: 3000, category: "coffee" },
-                { name: "카페라떼", price: 4000, category: "coffee" },
-                { name: "바닐라라떼", price: 4500, category: "coffee" },
-                { name: "초코라떼", price: 4200, category: "nonCoffee" },
-                { name: "레몬에이드", price: 5000, category: "ade" },
-                { name: "자몽에이드", price: 5200, category: "ade" },
-            ];
+        const loadMenu = () => {
             let result = [];
             for (let m of menuList) {
                 result.push(`<option>${m.name} : ${m.price}원</option>`);
@@ -164,14 +164,6 @@
 
         // 주문 검색하기 (기능 완료) 
         const search = () => {
-            const menuList = [
-                { name: "아메리카노", price: 3000, category: "coffee" },
-                { name: "카페라떼", price: 4000, category: "coffee" },
-                { name: "바닐라라떼", price: 4500, category: "coffee" },
-                { name: "초코라떼", price: 4200, category: "nonCoffee" },
-                { name: "레몬에이드", price: 5000, category: "ade" },
-                { name: "자몽에이드", price: 5200, category: "ade" },
-            ];
             let input = document.getElementById("searchInput").value;
             let result = ""
             let check = true;
@@ -193,15 +185,6 @@
 
         // 주문 추가하기 및 결과 반영 (기능 완료)
         const orderInput = () => {
-            const menuList = [
-                { name: "아메리카노", price: 3000, category: "coffee" },
-                { name: "카페라떼", price: 4000, category: "coffee" },
-                { name: "바닐라라떼", price: 4500, category: "coffee" },
-                { name: "초코라떼", price: 4200, category: "nonCoffee" },
-                { name: "레몬에이드", price: 5000, category: "ade" },
-                { name: "자몽에이드", price: 5200, category: "ade" },
-            ];
-
             let name = (document.getElementById("menuSelect").value.split(" "))[0];
             let count = Number(document.getElementById("menuCount").value);
             let table = document.getElementById("orderList").innerHTML;
@@ -235,7 +218,7 @@
             document.getElementById("priceAll").innerText = +(document.getElementById("priceAll").innerText) + priceAll;
         }
 
-        menuList();
+        loadMenu();
     </script>
 </body>
 
