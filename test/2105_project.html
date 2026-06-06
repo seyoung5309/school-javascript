@@ -100,7 +100,7 @@
         <div>
             <h2>메뉴 검색</h2>
             <input id="searchInput" placeholder="메뉴명을 입력하세요." class="box1">
-            <button onclick="search()" class="box2">검색</button>
+            <button onclick="searchMenu()" class="box2">검색</button>
             <br>
             <label id="searchResult">검색 결과가 여기에 표시됩니다.</label>
         </div>
@@ -152,71 +152,138 @@
             { name: "레몬에이드", price: 5000, category: "ade" },
             { name: "자몽에이드", price: 5200, category: "ade" },
         ];
-        // Select에 메뉴 불러오기 (기능 완료) 
+
+        const orderList = [];
+
+        // 메뉴 불러오기
         const loadMenu = () => {
-            let result = [];
-            for (let m of menuList) {
-                result.push(`<option>${m.name} : ${m.price}원</option>`);
-            }
-            console.log(result);
-            document.getElementById("menuSelect").innerHTML = result.join("");
-        }
+            const optionList = menuList.map(
+                (menu, index) =>
+                    `<option value="${index}">
+                ${menu.name} (${menu.price}원)
+            </option>`
+            );
 
-        // 주문 검색하기 (기능 완료) 
-        const search = () => {
-            let input = document.getElementById("searchInput").value;
-            let result = ""
-            let check = true;
-            for (let m of menuList) {
-                if (m.name.indexOf(input) > -1) {
-                    result += `메뉴명 : ${m.name} | 가격 : ${m.price} | 카테고리 : ${m.category}<br>`;
-                    check = false;
-                }
-            }
-            if (check) {
-                result = "검색 결과가 없습니다.";
-            }
-            if (input == '') {
-                result = "검색어가 없습니다.";
-            }
-            document.getElementById("searchResult").innerHTML = result;
+            document.getElementById("menuSelect").innerHTML =
+                optionList.join("");
+        };
 
-        }
-
-        // 주문 추가하기 및 결과 반영 (기능 완료)
+        // 주문 추가
         const orderInput = () => {
-            let name = (document.getElementById("menuSelect").value.split(" "))[0];
-            let count = Number(document.getElementById("menuCount").value);
-            let table = document.getElementById("orderList").innerHTML;
-            let tableLength = table.split("</tr>").length;
+            const menuIndex =
+                document.getElementById("menuSelect").value;
 
-            if (table.indexOf("주문 내역이 없습니다.") > -1) {
-                table = "";
-                tableLength = 1;
+            const quantity = Number(
+                document.getElementById("menuCount").value
+            );
+
+            if (!quantity || quantity < 1) {
+                alert("수량을 1개 이상 입력하세요.");
+                return;
             }
 
-            if (count === 0) {
-                console.log("수량이 없습니다");
-                return -1;
+            const menu = menuList[menuIndex];
+
+            const orderNo =
+                "ORDER-" +
+                String(orderList.length + 1).padStart(3, "0");
+
+            const order = {
+                orderNo: orderNo,
+                name: menu.name,
+                price: menu.price,
+                quantity: quantity,
+                total: menu.price * quantity,
+            };
+
+            orderList.push(order);
+
+            renderOrderTable();
+            updateTotalInfo();
+
+            document.getElementById("menuCount").value = 1;
+        };
+
+        // 주문 테이블 출력
+        const renderOrderTable = () => {
+            const tbody =
+                document.getElementById("orderList");
+
+            if (orderList.length === 0) {
+                tbody.innerHTML = `
+        <tr>
+            <td colspan="5" style="text-align:center">
+                주문 내역이 없습니다.
+            </td>
+        </tr>`;
+                return;
             }
 
-            let order = [];
-            let priceAll = 0;
-            for (let m of menuList) {
-                if (m.name === name) {
-                    order.push(`<tr><td>${tableLength}</td><td>${m.name}</td><td>${m.price}</td><td>${count}</td><td>${m.price * count}</td></tr>`);
-                    priceAll = m.price * count;
-                    break;
-                }
+            const rows = orderList.map(
+                (order) => `
+        <tr>
+            <td>${order.orderNo}</td>
+            <td>${order.name}</td>
+            <td>${order.price}</td>
+            <td>${order.quantity}</td>
+            <td>${order.total}</td>
+        </tr>
+    `
+            );
+
+            tbody.innerHTML = rows.join("");
+        };
+
+        // 총 수량, 총 금액 계산
+        const updateTotalInfo = () => {
+            const totalQuantity = orderList.reduce(
+                (sum, order) => sum + order.quantity,
+                0
+            );
+
+            const totalPrice = orderList.reduce(
+                (sum, order) => sum + order.total,
+                0
+            );
+
+            document.getElementById("orderAll").innerText =
+                totalQuantity;
+
+            document.getElementById("priceAll").innerText =
+                totalPrice.toLocaleString();
+        };
+
+        // 메뉴 검색
+        const searchMenu = () => {
+            const keyword = document
+                .getElementById("searchInput")
+                .value.trim()
+                .toLowerCase();
+
+            if (keyword === "") {
+                document.getElementById("searchResult").innerHTML =
+                    "검색어를 입력하세요.";
+                return;
             }
 
-            table += order;
-            console.log(order);
-            document.getElementById("orderList").innerHTML = table;
+            const result = menuList.filter((menu) =>
+                menu.name.toLowerCase().includes(keyword)
+            );
 
-            document.getElementById("orderAll").innerText = +(document.getElementById("orderAll").innerText) + count;
-            document.getElementById("priceAll").innerText = +(document.getElementById("priceAll").innerText) + priceAll;
-        }
+            if (result.length === 0) {
+                document.getElementById("searchResult").innerHTML =
+                    "검색 결과가 없습니다.";
+                return;
+            }
+
+            document.getElementById("searchResult").innerHTML =
+                result
+                    .map(
+                        (menu) =>
+                            `메뉴명 : ${menu.name} | 가격 : ${menu.price}원 | 카테고리 : ${menu.category}`
+                    )
+                    .join("<br>");
+        };
 
         loadMenu();
     </script>
