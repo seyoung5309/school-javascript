@@ -293,15 +293,15 @@
         let points = [100, 98, 95, 87, 79, 68];
         console.log(points.sort());
 
-        const ascPoints = points.sort((a, b) => {
-            return a - b;
-        });
-        console.log(ascPoints);
+        // const ascPoints = points.sort((a, b) => {
+        //     return a - b;
+        // });
+        // console.log(ascPoints);
 
-        const descPoints = points.sort((a, b) => {
-            return b - a;
-        });
-        console.log(descPoints);
+        // const descPoints = points.sort((a, b) => {
+        //     return b - a;
+        // });
+        // console.log(descPoints);
 
         // 10 - 1. sort()의 활용 => 가격을 기준으로 오름차순 정렬
         // 기준값이 지정되지 않았을 때, 이름/가격
@@ -313,16 +313,16 @@
             { name: "코카콜라", price: 1800 },
         ];
 
-        let key = prompt();
-        if (isNaN(drinklist[0][key])) {
-            let ascDrink = drinkList.sort((a, b) => {
-                return a[key] - b[key];
-            });
-        } else {
-            drinkList.sort();
-        }
+        // let key = prompt();
+        // if (isNaN(drinklist[0][key])) {
+        //     let ascDrink = drinkList.sort((a, b) => {
+        //         return a[key] - b[key];
+        //     });
+        // } else {
+        //     drinkList.sort();
+        // }
 
-        console.log(ascDrink);
+        // console.log(ascDrink);
 
         // ****** filter() : 배열에서 특정 조건에 맞는 요소만 배열로 반환 ******
         // drinkList에서 1000원으로 구입 가능한 음료 => for - of
