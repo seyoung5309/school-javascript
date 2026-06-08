@@ -275,16 +275,91 @@
       - 숫자 정렬 : 별도의 알고리즘을 동작시켜야 한다.
       자바스크립트의 비교 함수의 동작 원리 =>
       엔진이 내부적으로 알고리즘(크롬의 경우 TimSort 알고리즘)을 갖고 있으며
-      함수를 매개변수로 사용한다.
+      함수를 매개변수로 사용하며, 함수는 파라미터로 a, b를 갖는다.
       반환값에 따라 다음과 같이 동작한다.
+      if (a > b) return 1; // 양수이면 자리를 바꾼다.
+      else if (a < b) return -1; // 음수이면 자리를 바꾸지 않는다.
+      else 0; // 순서를 바꾸지 않는다.
+      => if, else if, else의 세 줄을 한 줄로 바꾸면...
 
       if (a > b) return 1; // 양수이면 자리를 바꾼다.
       else if (a < b) return -1; // 음수이면 자리를 바꾸지 않는다.
       else 0; // 순서를 바꾸지 않는다.
       */
       console.log(brands.sort());
+
       let points = [100, 98, 95, 87, 79, 68];
       console.log(points.sort());
+
+      const ascPoints = points.sort((a, b) => {
+        return a - b;
+      });
+      console.log(ascPoints);
+
+      const descPoints = points.sort((a, b) => {
+        return b - a;
+      });
+      console.log(descPoints);
+
+      // 10 - 1. sort()의 활용 => 가격을 기준으로 오름차순 정렬
+      // 기준값이 지정되지 않았을 때, 이름/가격
+      const drinkList = [
+        { name: "오렌지", price: 1000 },
+        { name: "파워에이드", price: 1200 },
+        { name: "커피", price: 700 },
+        { name: "보리음료", price: 1200 },
+        { name: "코카콜라", price: 1800 },
+      ];
+
+      let key = prompt();
+      if (isNaN(drinklist[0][key])) {
+        let ascDrink = drinkList.sort((a, b) => {
+          return a[key] - b[key];
+        });
+      } else {
+        drinkList.sort();
+      }
+
+      console.log(ascDrink);
+
+      // ****** filter() : 배열에서 특정 조건에 맞는 요소만 배열로 반환 ******
+      // drinkList에서 1000원으로 구입 가능한 음료 => for - of
+      for (let d of drinkList) {
+        if (d.price <= 1000) {
+          console.log(d);
+        }
+      }
+
+      let available = drinkList.filter((drink) => {
+        return drink.price <= 1000;
+      });
+      console.log(available);
+
+      // 과제 1 : 필터 조건 : 악세서리 중 10만원 이하인 것을 찾아라.
+      // 과제 2 : 필터 조건 : 카테고리 중 악세서리인 것을 찾아라.
+      // 과제 3 : 필터 조건 : 카테고리 중 악세서리이며, 가격이 10만원 이하인 것을 찾아라.
+
+      let products = [
+        { id: 1, name: "맥북 프로", category: "electronics", price: 2500000 },
+        {
+          id: 2,
+          name: "아이패드 에어",
+          category: "electronics",
+          price: 900000,
+        },
+        {
+          id: 3,
+          name: "기계식 키보드",
+          category: "accessories",
+          price: 150000,
+        },
+        {
+          id: 4,
+          name: "허브 매트",
+          category: "accessories",
+          price: 30000,
+        },
+      ];
     </script>
   </body>
 </html>
