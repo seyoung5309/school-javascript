@@ -1,31 +1,30 @@
 <!doctype html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <style>
-        .table1 {
-            width: 200px;
-            border: 1px solid black;
-            /* border-collapse: collapse; */
-            margin-top: 10px;
-        }
+      .table1 {
+        width: 200px;
+        border: 1px solid black;
+        /* border-collapse: collapse; */
+        margin-top: 10px;
+      }
 
-        .table1 th {
-            border: 1px solid black;
-            background-color: #c9e7f0;
-        }
+      .table1 th {
+        border: 1px solid black;
+        background-color: #c9e7f0;
+      }
 
-        .table1 td {
-            text-align: center;
-            border: 1px solid black;
-        }
+      .table1 td {
+        text-align: center;
+        border: 1px solid black;
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <select name="drinkType" id="drinkType"></select>
     <br />
     <select name="drinkType" id="drinkType2"></select>
@@ -53,226 +52,226 @@
     <button onclick="search1()">조회1(문자열)</button>
     <button onclick="search2()">조회2(push, join)</button>
     <table class="table1">
-        <thead>
-            <th>학번</th>
-            <th>이름</th>
-        </thead>
-        <tbody>
-            <tr>
-                <td>2101</td>
-                <td>강하윤</td>
-            </tr>
-            <tr>
-                <td>2102</td>
-                <td>김기범</td>
-            </tr>
-            <tr>
-                <td>2103</td>
-                <td>김진수</td>
-            </tr>
-            <tr>
-                <td>2104</td>
-                <td>사레 들린 토끼</td>
-            </tr>
-        </tbody>
+      <thead>
+        <th>학번</th>
+        <th>이름</th>
+      </thead>
+      <tbody>
+        <tr>
+          <td>2101</td>
+          <td>강하윤</td>
+        </tr>
+        <tr>
+          <td>2102</td>
+          <td>김기범</td>
+        </tr>
+        <tr>
+          <td>2103</td>
+          <td>김진수</td>
+        </tr>
+        <tr>
+          <td>2104</td>
+          <td>사레 들린 토끼</td>
+        </tr>
+      </tbody>
     </table>
 
     <!--DB에서 불러올 데이터를 보여줄 테이블-->
     <table class="table1">
-        <thead>
-            <th>음료</th>
-            <th>가격</th>
-        </thead>
-        <tbody id="tbody1"></tbody>
+      <thead>
+        <th>음료</th>
+        <th>가격</th>
+      </thead>
+      <tbody id="tbody1"></tbody>
     </table>
 
     <script>
-        // String, Array 등등... 이번 시험 범위
-        // JS 실무에서 가장 많이 사용하는 객체 (**) => 배열(array)
-        let brands = ["애플", "구글", "메타", "삼성", "아마존", "마이크로소프트"];
+      // String, Array 등등... 이번 시험 범위
+      // JS 실무에서 가장 많이 사용하는 객체 (**) => 배열(array)
+      let brands = ["애플", "구글", "메타", "삼성", "아마존", "마이크로소프트"];
 
-        // 1. toString() : 쉼표를 기준으로 하나의 문자열로 변환
-        console.log(brands.toString()); // 애플,구글,메타,삼성,아마존,마이크로소프트
+      // 1. toString() : 쉼표를 기준으로 하나의 문자열로 변환
+      console.log(brands.toString()); // 애플,구글,메타,삼성,아마존,마이크로소프트
 
-        // 2. join() : 파라미터로 전달된 문자를 이용해서 하나의 문자열로 합치기
-        // innerText, innerHTML의 차이점을 알게 해주는 것.
-        console.log(brands.join("")); // 애플구글메타삼성아마존마이크로소프트
-        console.log(brands.join("-")); // 애플-구글-메타-삼성-아마존-마이크로소프트
+      // 2. join() : 파라미터로 전달된 문자를 이용해서 하나의 문자열로 합치기
+      // innerText, innerHTML의 차이점을 알게 해주는 것.
+      console.log(brands.join("")); // 애플구글메타삼성아마존마이크로소프트
+      console.log(brands.join("-")); // 애플-구글-메타-삼성-아마존-마이크로소프트
 
-        // 2-1. += =    > DB에서 데이터를 읽어와 동적으로 표를 이용해서 출력
-        // 장점 : 가독성 , 단점 : 성능 저하
-        const search1 = () => {
-            // 1. 데이터를 읽어오기
-            const drinkList = [
-                { name: "오렌지", price: 1000 },
-                { name: "파워에이드", price: 1200 },
-                { name: "커피", price: 700 },
-                { name: "보리음료", price: 1200 },
-                { name: "코카콜라", price: 1800 },
-            ];
-            // 2. 데이터 수에 맞게 태그 생성
-            let tagsStr = "";
-            for (drink of drinkList) {
-                tagsStr +=
-                    "<tr>" +
-                    "<td>" +
-                    drink.name +
-                    "</td>" +
-                    "<td>" +
-                    drink.price +
-                    "</td>" +
-                    "</tr>";
-            }
-            console.log(tagsStr);
-            // 3. 태그 랜더링(innerHTML)해서 화면에 뿌리기
-            document.getElementById("tbody1").innerHTML = tagsStr;
-        };
-
-        // 2-2. join() 실무 활용 예제 => DB에서 데이터를 읽어와 동적으로 표를 이용해서 출력
-        // 장점 : 성능, 단점 : X
-        const search2 = () => {
-            // 1. 데이터를 읽어오기
-            const drinkList = [
-                { name: "오렌지", price: 1000 },
-                { name: "파워에이드", price: 1200 },
-                { name: "커피", price: 700 },
-                { name: "보리음료", price: 1200 },
-                { name: "코카콜라", price: 1800 },
-            ];
-            // 2. 데이터 수에 맞게 태그 생성
-            let tagsArray = [];
-            for (drink of drinkList) {
-                tagsArray.push(
-                    `<tr><td>${drink.name}</td><td>${drink.price}</td></tr>`,
-                );
-            }
-            console.log(tagsArray);
-            // 3. 태그 랜더링(innerHTML)해서 화면에 뿌리기
-            document.getElementById("tbody1").innerHTML = tagsArray.join("");
-        };
-
-        // 3. pop() : 배열의 마지막 요소 삭제, 리턴: 마지막 요소
-        brands = ["애플", "구글", "메타", "삼성", "아마존", "마이크로소프트"];
-        console.log(brands.pop());
-        console.log(brands);
-
-        // 4. push() : 배열의 마지막 요소 추가, 리턴: 배열의 길이 (활용: + join())
-        console.log(brands.push("테슬라"));
-        console.log(brands);
-
-        // 5. unshift() : 배열의 처음에 요소 추가, 리턴: 배열의 길이 (활용: + join())
-        // 단점: 실무 활용도가 낮다. ((앞에 요소를 추가하면 배열을 뒤로 하나씩 땡겨야 하기에 성능이 좋지 않다.
-        console.log(brands.unshift("하이닉스"));
-        console.log(brands);
-
-        // 5-1. unshift() 실무 활용 예제
-        function loadDrinkList() {
-            const types = [
-                { text: "이온음료", code: "A" },
-                { text: "커피", code: "B" },
-                { text: "콜라", code: "C" },
-            ];
-            const tags = [];
-            types.unshift({ text: "주스", code: "D" });
-            types.unshift({ text: "전체", code: "ALL" });
-            for (type of types) {
-                tags.push(
-                    "<option value= " + type.code + ">" + type.text + "</option>",
-                );
-            }
-            return tags;
+      // 2-1. += =    > DB에서 데이터를 읽어와 동적으로 표를 이용해서 출력
+      // 장점 : 가독성 , 단점 : 성능 저하
+      const search1 = () => {
+        // 1. 데이터를 읽어오기
+        const drinkList = [
+          { name: "오렌지", price: 1000 },
+          { name: "파워에이드", price: 1200 },
+          { name: "커피", price: 700 },
+          { name: "보리음료", price: 1200 },
+          { name: "코카콜라", price: 1800 },
+        ];
+        // 2. 데이터 수에 맞게 태그 생성
+        let tagsStr = "";
+        for (drink of drinkList) {
+          tagsStr +=
+            "<tr>" +
+            "<td>" +
+            drink.name +
+            "</td>" +
+            "<td>" +
+            drink.price +
+            "</td>" +
+            "</tr>";
         }
-        const tagsList = loadDrinkList();
-        // types.unshift({ text: "전체", code: "ALL" }); // 여기서 하는게 원래 좋음.
-        document.getElementById("drinkType").innerHTML = tagsList.join("");
+        console.log(tagsStr);
+        // 3. 태그 랜더링(innerHTML)해서 화면에 뿌리기
+        document.getElementById("tbody1").innerHTML = tagsStr;
+      };
 
-        // 실습 - { text: "주스", code: "D" } 삽입
-        // ㄴ> 그냥 함수 안에서 types에 unshift 해버림.
+      // 2-2. join() 실무 활용 예제 => DB에서 데이터를 읽어와 동적으로 표를 이용해서 출력
+      // 장점 : 성능, 단점 : X
+      const search2 = () => {
+        // 1. 데이터를 읽어오기
+        const drinkList = [
+          { name: "오렌지", price: 1000 },
+          { name: "파워에이드", price: 1200 },
+          { name: "커피", price: 700 },
+          { name: "보리음료", price: 1200 },
+          { name: "코카콜라", price: 1800 },
+        ];
+        // 2. 데이터 수에 맞게 태그 생성
+        let tagsArray = [];
+        for (drink of drinkList) {
+          tagsArray.push(
+            `<tr><td>${drink.name}</td><td>${drink.price}</td></tr>`,
+          );
+        }
+        console.log(tagsArray);
+        // 3. 태그 랜더링(innerHTML)해서 화면에 뿌리기
+        document.getElementById("tbody1").innerHTML = tagsArray.join("");
+      };
 
-        // =====
+      // 3. pop() : 배열의 마지막 요소 삭제, 리턴: 마지막 요소
+      brands = ["애플", "구글", "메타", "삼성", "아마존", "마이크로소프트"];
+      console.log(brands.pop());
+      console.log(brands);
 
-        // unshift할 대상이 있는 경우, 매개변수로 받아서 맨 위에 올리기
-        // unshift할 대상이 없는 경우, DB에서 읽어온 데이터만 뿌리기
-        let input1 = { text: "전체", code: "ALL" };
-        let input2 = [
-            { text: "독약", code: "M" },
-            { text: "기능", code: "O" },
-            { text: "배열", code: "Array" },
+      // 4. push() : 배열의 마지막 요소 추가, 리턴: 배열의 길이 (활용: + join())
+      console.log(brands.push("테슬라"));
+      console.log(brands);
+
+      // 5. unshift() : 배열의 처음에 요소 추가, 리턴: 배열의 길이 (활용: + join())
+      // 단점: 실무 활용도가 낮다. ((앞에 요소를 추가하면 배열을 뒤로 하나씩 땡겨야 하기에 성능이 좋지 않다.
+      console.log(brands.unshift("하이닉스"));
+      console.log(brands);
+
+      // 5-1. unshift() 실무 활용 예제
+      function loadDrinkList() {
+        const types = [
+          { text: "이온음료", code: "A" },
+          { text: "커피", code: "B" },
+          { text: "콜라", code: "C" },
+        ];
+        const tags = [];
+        types.unshift({ text: "주스", code: "D" });
+        types.unshift({ text: "전체", code: "ALL" });
+        for (type of types) {
+          tags.push(
+            "<option value= " + type.code + ">" + type.text + "</option>",
+          );
+        }
+        return tags;
+      }
+      const tagsList = loadDrinkList();
+      // types.unshift({ text: "전체", code: "ALL" }); // 여기서 하는게 원래 좋음.
+      document.getElementById("drinkType").innerHTML = tagsList.join("");
+
+      // 실습 - { text: "주스", code: "D" } 삽입
+      // ㄴ> 그냥 함수 안에서 types에 unshift 해버림.
+
+      // =====
+
+      // unshift할 대상이 있는 경우, 매개변수로 받아서 맨 위에 올리기
+      // unshift할 대상이 없는 경우, DB에서 읽어온 데이터만 뿌리기
+      let input1 = { text: "전체", code: "ALL" };
+      let input2 = [
+        { text: "독약", code: "M" },
+        { text: "기능", code: "O" },
+        { text: "배열", code: "Array" },
+      ];
+
+      const loadDrinkList2 = (input) => {
+        // 데이터 불러오기
+        const types = [
+          { text: "이온음료", code: "A" },
+          { text: "커피", code: "B" },
+          { text: "콜라", code: "C" },
         ];
 
-        const loadDrinkList2 = (input) => {
-            // 데이터 불러오기
-            const types = [
-                { text: "이온음료", code: "A" },
-                { text: "커피", code: "B" },
-                { text: "콜라", code: "C" },
-            ];
-
-            // 매개변수가 있다면
-            if (input) {
-                if (input.length) {
-                    for (let i of input) {
-                        types.unshift(i);
-                    }
-                } else {
-                    types.unshift(input);
-                }
+        // 매개변수가 있다면
+        if (input) {
+          if (input.length) {
+            for (let i of input) {
+              types.unshift(i);
             }
+          } else {
+            types.unshift(input);
+          }
+        }
 
-            // option 태그로 저장하기
-            let tags = [];
-            for (type of types) {
-                tags.push(
-                    "<option value= " + type.code + ">" + type.text + "</option>",
-                );
-            }
-            return tags;
-        };
+        // option 태그로 저장하기
+        let tags = [];
+        for (type of types) {
+          tags.push(
+            "<option value= " + type.code + ">" + type.text + "</option>",
+          );
+        }
+        return tags;
+      };
 
-        // html에 출력하기
-        document.getElementById("drinkType2").innerHTML =
-            loadDrinkList2(input2).join("");
+      // html에 출력하기
+      document.getElementById("drinkType2").innerHTML =
+        loadDrinkList2(input2).join("");
 
-        // 6. shift() : 배열의 처음에 요소 삭제, 리턴: 처음 요소 (백엔드에서 자주 사용한다.)
-        brands = ["애플", "구글", "메타", "삼성", "아마존", "마이크로소프트"];
-        console.log(brands.shift()); // 애플
-        console.log(brands);
+      // 6. shift() : 배열의 처음에 요소 삭제, 리턴: 처음 요소 (백엔드에서 자주 사용한다.)
+      brands = ["애플", "구글", "메타", "삼성", "아마존", "마이크로소프트"];
+      console.log(brands.shift()); // 애플
+      console.log(brands);
 
-        // 7. concat() : 배열을 이어 붙이기
-        let arr1 = ["A", "B"];
-        let arr2 = ["C", "D"];
-        let arr3 = ["E", "F"];
-        let arr4 = arr1.concat(arr2);
-        let arr5 = arr1.concat(arr2, arr3); // 혹은 arr1.concat(arr2).concat(arr3);
-        console.log(arr4);
-        console.log(arr5);
+      // 7. concat() : 배열을 이어 붙이기
+      let arr1 = ["A", "B"];
+      let arr2 = ["C", "D"];
+      let arr3 = ["E", "F"];
+      let arr4 = arr1.concat(arr2);
+      let arr5 = arr1.concat(arr2, arr3); // 혹은 arr1.concat(arr2).concat(arr3);
+      console.log(arr4);
+      console.log(arr5);
 
-        // ***** 전개 연산자(spread operator) - ES6부터. '.'은 무조건 3개.
-        let arr6 = [...arr1, ...arr2, ...arr3];
-        console.log(arr6);
+      // ***** 전개 연산자(spread operator) - ES6부터. '.'은 무조건 3개.
+      let arr6 = [...arr1, ...arr2, ...arr3];
+      console.log(arr6);
 
-        // 8. ***splice(p1, p2, p3) : 특정한 위치에 요소를 추가하거나 삭제 (이어붙이다.)***
-        // p1: 추가할 요소의 위치 | p2: 삭제 할 갯수 | p3: 추가할 요소
-        brands = ["애플", "구글", "메타", "삼성", "아마존", "마이크로소프트"];
-        // 구글 앞에 "하이닉스" 삽입
-        brands.splice(1, 0, "하이닉스");
-        console.log(brands);
+      // 8. ***splice(p1, p2, p3) : 특정한 위치에 요소를 추가하거나 삭제 (이어붙이다.)***
+      // p1: 추가할 요소의 위치 | p2: 삭제 할 갯수 | p3: 추가할 요소
+      brands = ["애플", "구글", "메타", "삼성", "아마존", "마이크로소프트"];
+      // 구글 앞에 "하이닉스" 삽입
+      brands.splice(1, 0, "하이닉스");
+      console.log(brands);
 
-        // "삼성", "아마존" 삭제
-        brands.splice(4, 2);
-        console.log(brands);
+      // "삼성", "아마존" 삭제
+      brands.splice(4, 2);
+      console.log(brands);
 
-        // brands ['애플', '하이닉스', '구글', '메타', '마이크로소프트']
-        // 로직으로 구현: "구글" 앞에 "테슬라" 삽입
-        brands = ["애플", "하이닉스", "구글", "메타", "마이크로소프트"];
-        brands.splice(brands.indexOf("구글"), 0, "테슬라");
-        console.log(brands);
+      // brands ['애플', '하이닉스', '구글', '메타', '마이크로소프트']
+      // 로직으로 구현: "구글" 앞에 "테슬라" 삽입
+      brands = ["애플", "하이닉스", "구글", "메타", "마이크로소프트"];
+      brands.splice(brands.indexOf("구글"), 0, "테슬라");
+      console.log(brands);
 
-        // 9. slice(start, end) : end - 1까지 잘라내 배열로 반환
-        // brands = ['애플', '하이닉스', '테슬라', '구글', '메타', '마이크로소프트'];
-        console.log(brands.slice(2, 5)); // 2 ~ 4까지의 인덱스 값을 받아옴
+      // 9. slice(start, end) : end - 1까지 잘라내 배열로 반환
+      // brands = ['애플', '하이닉스', '테슬라', '구글', '메타', '마이크로소프트'];
+      console.log(brands.slice(2, 5)); // 2 ~ 4까지의 인덱스 값을 받아옴
 
-        /* 10. ****** sort() : 정렬
+      /* 10. ****** sort() : 정렬
         - 기준 : 문자열 (오름차순)
         - 숫자 정렬 : 별도의 알고리즘을 동작시켜야 한다.
         자바스크립트의 비교 함수의 동작 원리 =>
@@ -288,105 +287,98 @@
         else if (a < b) return -1; // 음수이면 자리를 바꾸지 않는다.
         else 0; // 순서를 바꾸지 않는다.
         */
-        console.log(brands.sort());
+      console.log(brands.sort());
 
-        let points = [100, 98, 95, 87, 79, 68];
-        console.log(points.sort());
+      let points = [100, 98, 95, 87, 79, 68];
+      console.log(points.sort());
 
-        // const ascPoints = points.sort((a, b) => {
-        //     return a - b;
-        // });
-        // console.log(ascPoints);
+      // const ascPoints = points.sort((a, b) => {
+      //     return a - b;
+      // });
+      // console.log(ascPoints);
 
-        // const descPoints = points.sort((a, b) => {
-        //     return b - a;
-        // });
-        // console.log(descPoints);
+      // const descPoints = points.sort((a, b) => {
+      //     return b - a;
+      // });
+      // console.log(descPoints);
 
-        // 10 - 1. sort()의 활용 => 가격을 기준으로 오름차순 정렬
-        // 기준값이 지정되지 않았을 때, 이름/가격
-        const drinkList = [
-            { name: "오렌지", price: 1000 },
-            { name: "파워에이드", price: 1200 },
-            { name: "커피", price: 700 },
-            { name: "보리음료", price: 1200 },
-            { name: "코카콜라", price: 1800 },
-        ];
+      // 10 - 1. sort()의 활용 => 가격을 기준으로 오름차순 정렬
+      // 기준값이 지정되지 않았을 때, 이름/가격
+      const drinkList = [
+        { name: "오렌지", price: 1000 },
+        { name: "파워에이드", price: 1200 },
+        { name: "커피", price: 700 },
+        { name: "보리음료", price: 1200 },
+        { name: "코카콜라", price: 1800 },
+      ];
 
-        // let key = prompt();
-        // if (isNaN(drinklist[0][key])) {
-        //     let ascDrink = drinkList.sort((a, b) => {
-        //         return a[key] - b[key];
-        //     });
-        // } else {
-        //     drinkList.sort();
-        // }
+      // let key = prompt();
+      // if (isNaN(drinklist[0][key])) {
+      //     let ascDrink = drinkList.sort((a, b) => {
+      //         return a[key] - b[key];
+      //     });
+      // } else {
+      //     drinkList.sort();
+      // }
 
-        // console.log(ascDrink);
+      // console.log(ascDrink);
 
-        // ****** filter() : 배열에서 특정 조건에 맞는 요소만 배열로 반환 ******
-        // drinkList에서 1000원으로 구입 가능한 음료 => for - of
-        for (let d of drinkList) {
-            if (d.price <= 1000) {
-                console.log(d);
-            }
+      // ****** filter() : 배열에서 특정 조건에 맞는 요소만 배열로 반환 ******
+      // drinkList에서 1000원으로 구입 가능한 음료 => for - of
+      for (let d of drinkList) {
+        if (d.price <= 1000) {
+          console.log(d);
         }
+      }
 
-        let available = drinkList.filter((drink) => {
-            return drink.price <= 1000;
-        });
-        console.log(available);
+      let available = drinkList.filter((drink) => {
+        return drink.price <= 1000;
+      });
+      console.log(available);
 
-        // 과제 1 : 필터 조건 : 악세서리 중 10만원 이하인 것을 찾아라.
-        // 과제 2 : 필터 조건 : 카테고리 중 악세서리인 것을 찾아라.
-        // 과제 3 : 필터 조건 : 카테고리 중 악세서리이며, 가격이 10만원 이하인 것을 찾아라.
+      // 과제 1 : 필터 조건 : 악세서리 중 10만원 이하인 것을 찾아라.
+      // 과제 2 : 필터 조건 : 카테고리 중 악세서리인 것을 찾아라.
+      // 과제 3 : 필터 조건 : 카테고리 중 악세서리이며, 가격이 10만원 이하인 것을 찾아라.
 
-        let products = [
-            { id: 1, name: "맥북 프로", category: "electronics", price: 2500000 },
-            {
-                id: 2,
-                name: "아이패드 에어",
-                category: "electronics",
-                price: 900000,
-            },
-            {
-                id: 3,
-                name: "기계식 키보드",
-                category: "accessories",
-                price: 150000,
-            },
-            {
-                id: 4,
-                name: "허브 매트",
-                category: "accessories",
-                price: 30000,
-            },
-        ];
+      let products = [
+        { id: 1, name: "맥북 프로", category: "electronics", price: 2500000 },
+        {
+          id: 2,
+          name: "아이패드 에어",
+          category: "electronics",
+          price: 900000,
+        },
+        {
+          id: 3,
+          name: "기계식 키보드",
+          category: "accessories",
+          price: 150000,
+        },
+        {
+          id: 4,
+          name: "허브 매트",
+          category: "accessories",
+          price: 30000,
+        },
+      ];
 
-        // 과제 1 : 필터 조건 : 악세서리 중 10만원 이하인 것을 찾아라.
-        let filterArr1 = products.filter((product) => {
-            return product.category === "accessories" &&
-                product.price <= 100000;
-        });
+      // 과제 1 : 필터 조건 : 10만원 이하인 것을 찾아라.
+      let filterArr1 = products.filter((product) => {
+        return product.price <= 100000;
+      });
+      console.log(filterArr1);
 
-        console.log(filterArr1);
+      // 과제 2 : 필터 조건 : 카테고리 중 악세서리인 것을 찾아라.
+      let filterArr2 = products.filter((product) => {
+        return product.category === "accessories";
+      });
+      console.log(filterArr2);
 
-        // 과제 2 : 필터 조건 : 카테고리 중 악세서리인 것을 찾아라.
-        let filterArr2 = products.filter((product) => {
-            return product.category === "accessories";
-        });
-
-        console.log(filterArr2);
-
-        // 과제 3 : 필터 조건 : 카테고리 중 악세서리이며, 가격이 10만원 이하인 것을 찾아라.
-        let filterArr3 = products.filter((product) => {
-            return product.category === "accessories" &&
-                product.price <= 100000;
-        });
-
-        console.log(filterArr3);
-
+      // 과제 3 : 필터 조건 : 카테고리 중 악세서리이며, 가격이 10만원 이하인 것을 찾아라.
+      let filterArr3 = products.filter((product) => {
+        return product.category === "accessories" && product.price <= 100000;
+      });
+      console.log(filterArr3);
     </script>
-</body>
-
+  </body>
 </html>
