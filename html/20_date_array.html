@@ -9,8 +9,58 @@
     <input type="date" name="" id="startDate" />
     <input type="date" name="" id="endDate" />
     <script>
+      // 객체 생성하기
       let now = new Date();
       console.log(now);
+
+      // 2. 년, 월(0 ~), 일, 시간, 분, 초, 밀리초로 만들기
+      // 월은 0부터 시작한다.
+      let d = new Date(2026, 4, 5, 13, 10, 0);
+      console.log(d);
+
+      // 3. get() 내장 함수
+      let year = now.getFullYear();
+      let month = now.getMonth();
+      let day = now.getDay(); // 요일
+      let date = now.getDate(); // 일
+      let hour = now.getHours(); // 시
+      let minute = now.getMinutes();
+      let second = now.getMilliseconds();
+
+      console.log(year, month, date, day, hour, minute, second);
+
+      // 4. set() 내장 함수 - 수업 X
+
+      // 5. 오늘 날짜 구하기 => endDate에 뿌리기
+      // YYYY-MM-DD
+      console.log("=====");
+
+      now = new Date();
+      let today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${now.getDate()}`;
+      console.log(today);
+      document.getElementById("endDate").value = today;
+
+      // 6. 1주일 전을 startDate에 뿌려보자! ( => 현실적으로 뭔가 이상함.)
+      year = now.getFullYear();
+      month = now.getMonth();
+      date = now.getDate();
+
+      let beforeSevendays = 0;
+
+      // 6. 기준시 지원 : 1970/01/01/00:00:00 (Date 객체의 기준시)
+      // 7일의 밀리초 = 24 * 60 * 60 * 1000 * 7
+      let d2 = new Date(0);
+      console.log(d2);
+
+      let d3 = new Date(24 * 60 * 60 * 1000 * 7);
+      console.log(d3);
+
+      let current = now.getTime();
+      console.log(current);
+
+      beforeSevendays = new Date(current - d3.getTime());
+      beforeSevendays_date = `${beforeSevendays.getFullYear()}-${String(beforeSevendays.getMonth() + 1).padStart(2, "0")}-${beforeSevendays.getDate()}`;
+      document.getElementById("startDate").value = beforeSevendays_date;
     </script>
   </body>
 </html>
