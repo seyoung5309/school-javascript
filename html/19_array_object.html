@@ -338,7 +338,7 @@
 
       // 10 - 1. sort()의 활용 => 가격을 기준으로 오름차순 정렬
       // 기준값이 지정되지 않았을 때, 이름/가격
-      const drinkList = [
+      let drinkList = [
         { name: "오렌지", price: 1000 },
         { name: "파워에이드", price: 1200 },
         { name: "커피", price: 700 },
@@ -441,6 +441,72 @@
       console.log(productTable);
       document.getElementById("productTable").innerHTML +=
         productTable.join("");
+
+      // 13. reduce : 누적합을 구하는 함수
+      /*
+        배열.reduce((누적값, 현재값, 인덱스, 원본배열) => {
+          return 다음 누산기에 넘겨줄 값
+        }, 초깃값);
+      */
+      products = [
+        { id: 1, name: "맥북 프로", category: "electronics", price: 2500000 },
+        {
+          id: 2,
+          name: "아이패드 에어",
+          category: "electronics",
+          price: 900000,
+        },
+        {
+          id: 3,
+          name: "기계식 키보드",
+          category: "accessories",
+          price: 150000,
+        },
+        {
+          id: 4,
+          name: "허브 매트",
+          category: "accessories",
+          price: 30000,
+        },
+      ];
+
+      let sum = 0;
+      for (let i of products) {
+        sum += i.price;
+      }
+      console.log(sum);
+
+      let sumOfPrice = products.reduce((sum, product, i, products) => {
+        sum += product.price;
+        return sum;
+      }, 0);
+
+      sumOfPrice = products.reduce((sum, product) => {
+        // 3, 4 인자 생략 가능
+        sum += product.price;
+        return sum;
+      }, 0);
+
+      console.log(sumOfPrice);
+
+      points = [100, 98, 95, 87, 79, 68];
+      let sumOfPoint = points.reduce((sum, point) => {
+        return (sum += point);
+      }, 0);
+      console.log(sumOfPoint); // 527
+
+      drinkList = [
+        { name: "오렌지", price: 1000 },
+        { name: "파워에이드", price: 1200 },
+        { name: "커피", price: 700 },
+        { name: "보리음료", price: 1200 },
+        { name: "코카콜라", price: 1800 },
+      ];
+
+      let sumOfdrink = drinkList.reduce((sum, drink) => {
+        return (sum += drink.price);
+      }, 0);
+      console.log(sumOfdrink);
     </script>
   </body>
 </html>
