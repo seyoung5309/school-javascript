@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=], initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <label>이름</label>
+    <input id="inputName" />
+
+    <br />
+
+    <label>이메일</label>
+    <input id="inputEmail" />
+
+    <br />
+    <button onclick="submit()">제출</button>
+
+    <br />
+    <br />
+
+    <table border="1">
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>이름</th>
+          <th>이메일</th>
+        </tr>
+      </thead>
+
+      <tbody id="table"></tbody>
+    </table>
+
+    <script>
+      let userList = [];
+
+      const submit = () => {
+        let name = String(document.getElementById("inputName").value)
+          .trim()
+          .toLocaleLowerCase();
+
+        let email = String(document.getElementById("inputEmail").value)
+          .trim()
+          .toLocaleLowerCase()
+          .split("@");
+
+        if (name.length < 2) {
+          alert("이름을 정확히 입력하세요.");
+          return 0;
+        }
+
+        let result = {
+          id:
+            name +
+            "_" +
+            email[0] +
+            "_" +
+            String(userList.length + 1).padStart(4, 0),
+          name: name,
+          email: email.join("@"),
+        };
+        userList.push(result);
+
+        for (let i of userList) {
+          console.log(i);
+        }
+        userTable();
+      };
+
+      function userTable() {
+        let userTable = userList.map((user) => {
+          return `<tr>
+          <td>${user.id}</td>
+          <td>${user.name}</td>
+          <td>${user.email}</td>
+        </tr>`;
+        });
+
+        document.getElementById("table").innerHTML = userTable.join("");
+      }
+    </script>
+  </body>
+</html>

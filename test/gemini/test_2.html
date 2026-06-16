@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <label>상품</label>
+    <select id="selectProduct"></select>
+
+    <br />
+    <label>수량</label>
+    <input id="count" type="number" />
+
+    <br />
+    <button onclick="insertProduct()">구매하기</button>
+    <script>
+      let products = [
+        { id: 1, name: "컴퓨터", price: 3500000 },
+        { id: 2, name: "핸드폰", price: 1440000 },
+        { id: 3, name: "키보드", price: 120000 },
+        { id: 4, name: "헤드셋", price: 60000 },
+      ];
+
+      let buyProduct = [];
+
+      function selectProduct() {
+        let productList = products.map((product) => {
+          return `<option>${product.name} (${product.price.toLocaleString()}원)</option>`;
+        });
+        console.log(productList);
+        document.getElementById("selectProduct").innerHTML =
+          productList.join("");
+      }
+
+      function insertProduct() {
+        let name = document.getElementById("selectProduct").value;
+      }
+
+      selectProduct();
+    </script>
+  </body>
+</html>
