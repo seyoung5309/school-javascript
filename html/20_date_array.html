@@ -58,8 +58,9 @@
       let current = now.getTime();
       console.log(current);
 
+      // 6. 오늘을 기준으로 7일 전을 YYYY-MM-DD 포맷으로 id="startDate"
       beforeSevendays = new Date(current - d3.getTime());
-      beforeSevendays_date = `${beforeSevendays.getFullYear()}-${String(beforeSevendays.getMonth() + 1).padStart(2, "0")}-${beforeSevendays.getDate()}`;
+      beforeSevendays_date = `${beforeSevendays.getFullYear()}-${String(beforeSevendays.getMonth() + 1).padStart(2, "0")}-${String(beforeSevendays.getDate()).padStart(2, 0)}`;
       document.getElementById("startDate").value = beforeSevendays_date;
     </script>
   </body>
