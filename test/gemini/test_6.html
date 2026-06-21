@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <label>학생 정보 입력</label>
+    <br>
+
+    <label>이름</label>
+    <input id="inputName">
+    <br>
+
+    <label>점수</label>
+    <input id="inputScore">
+
+    <br>
+    <button onclick="inputNameScore()">제출하기</button>
+
+    <br>
+    <br>
+
+    <table border="1px" width="300px">
+        <thead>
+            <tr>
+                <th>이름</th>
+                <th>점수</th>
+            </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+    </table>
+
+    <br>
+    <label>평균 점수: </label><label id="avgScore"></label>
+    <br>
+    <label>최고 점수 학생: </label><label id="maxName"></label>
+
+    <br><br>
+    <label>검색</label>
+    <input id="nameSearch"></input>
+    <button onclick="search()">검색하기</button>
+    <table border="1px" , width="300px">
+        <thead>
+            <tr>
+                <th>이름</th>
+                <th>점수</th>
+            </tr>
+        </thead>
+        <tbody id="searchTable">
+            <tr>
+                <td colspan="2">
+                    검색 결과가 없습니다.
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        /*
+        기능 1 : 학생 목록 출력
+            학생 정보를 테이블에 출력한다.
+        기능 2 : 학생 추가
+            이름과 점수를 입력받아 학생 목록에 추가한다.
+        기능 3 : 평균 점수 계산
+            전체 학생의 평균 점수를 화면에 표시한다.
+        기능 4 : 최고 점수 학생 찾기
+            가장 높은 점수를 가진 학생 정보를 화면에 표시한다.
+        기능 5 : 학생 검색
+            이름 일부를 입력하면 해당 학생만 검색 결과로 표시한다.
+        */
+        const studentList = [
+            { name: "김민수", score: 85 },
+            { name: "이서연", score: 92 },
+            { name: "박지훈", score: 78 }
+        ];
+
+        function tableBody() {
+            let tableStudentList = studentList.map((student) => {
+                return `<tr><td>${student.name}</td><td>${student.score}</td></tr>`
+            });
+            document.getElementById("tableBody").innerHTML = tableStudentList.join("");
+            avgScore();
+            maxName()
+        }
+
+        function inputNameScore() {
+            let name = document.getElementById("inputName").value;
+            let score = document.getElementById("inputScore").value;
+            studentList.push({ name: name, score: score });
+            tableBody();
+        }
+
+        function avgScore() {
+            avg = studentList.reduce((sum, student) => {
+                return +sum + +student.score;
+            }, 0);
+            document.getElementById("avgScore").innerText = (avg / studentList.length).toFixed(2);
+        }
+
+        function maxName() {
+            let max = studentList[0];
+            for (let i of studentList) {
+                if (i.score > max.score) {
+                    max = i;
+                }
+            }
+            document.getElementById("maxName").innerText = max.name;
+        }
+
+        function search() {
+            let input = document.getElementById("nameSearch").value;
+            let arr = [];
+            for (let i of studentList) {
+                if (i.name.indexOf(input) > -1) {
+                    arr.push(i);
+                }
+            }
+            let output = arr.map((a) => {
+                return `<tr><td>${a.name}</td><td>${a.score}</td></tr>`
+            });
+            document.getElementById("searchTable").innerHTML = output.join("");
+        }
+
+        tableBody();
+    </script>
+</body>
+
+</html>
