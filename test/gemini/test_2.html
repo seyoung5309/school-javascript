@@ -1,11 +1,13 @@
 <!doctype html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-  </head>
-  <body>
+</head>
+
+<body>
     <label>상품</label>
     <select id="selectProduct"></select>
 
@@ -13,32 +15,50 @@
     <label>수량</label>
     <input id="count" type="number" />
 
+    <br>
+    <label id="totalPrice">총 금액:</label>
+    <br>
+    <label id="avgPrice">평균 금액:</label>
+
     <br />
     <button onclick="insertProduct()">구매하기</button>
     <script>
-      let products = [
-        { id: 1, name: "컴퓨터", price: 3500000 },
-        { id: 2, name: "핸드폰", price: 1440000 },
-        { id: 3, name: "키보드", price: 120000 },
-        { id: 4, name: "헤드셋", price: 60000 },
-      ];
+        let products = [
+            { id: 1, name: "컴퓨터", price: 3500000 },
+            { id: 2, name: "핸드폰", price: 1440000 },
+            { id: 3, name: "키보드", price: 120000 },
+            { id: 4, name: "헤드셋", price: 60000 },
+        ];
 
-      let buyProduct = [];
+        let buyProduct = [];
 
-      function selectProduct() {
-        let productList = products.map((product) => {
-          return `<option>${product.name} (${product.price.toLocaleString()}원)</option>`;
-        });
-        console.log(productList);
-        document.getElementById("selectProduct").innerHTML =
-          productList.join("");
-      }
+        function selectProduct() {
+            let productList = products.map((product, index) => {
+                return `<option value="${index}"> ${product.name}(${product.price.toLocaleString()}원)</option >`;
+            });
+            console.log(productList);
+            document.getElementById("selectProduct").innerHTML =
+                productList.join("");
+        }
 
-      function insertProduct() {
-        let name = document.getElementById("selectProduct").value;
-      }
+        function insertProduct() {
+            let name = products[document.getElementById("selectProduct").value];
+            let count = document.getElementById("count").value;
+            buyProduct.push({ name: name.name, price: name.price * count });
+            console.log(buyProduct);
+            totalPrice();
+        }
 
-      selectProduct();
+        function totalPrice() {
+            let price = buyProduct.reduce((sum, buy) => {
+                return sum + buy.price;
+            }, 0)
+            console.log(price)
+            document.getElementById("totalPrice").innerHTML = "총 금액:" + price;
+            document.getElementById("avgPrice").innerHTML = "평균 금액:" + (price / buyProduct.length).toFixed(2);
+        }
+        selectProduct();
     </script>
-  </body>
+</body>
+
 </html>
