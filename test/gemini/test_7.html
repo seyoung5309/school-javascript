@@ -8,8 +8,85 @@
 </head>
 
 <body>
-    <script>
+    <label>영화</label>
+    <select id="movieSelect"></select>
 
+    <br>
+
+    <label>인원</label>
+    <input id="count" type="number">
+
+    <br>
+
+    <button onclick="movieInput()">예매하기</button>
+
+    <br><br>
+
+    <table border="1px" , width="300px">
+        <thead>
+            <tr>
+                <th>제목</th>
+                <th>인당 가격</th>
+                <th>인원</th>
+                <th>총 가격</th>
+            </tr>
+        </thead>
+        <tbody id="visitMovie">
+            <tr>
+                <td colspan="4">예매 내역이 없습니다.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        /*
+        기능 1 : 영화 목록 출력
+            select 태그에 영화 제목을 출력한다.
+        기능 2 : 예매 추가
+            영화와 인원 수를 선택하여 예매 내역을 추가한다.
+        기능 3 : 예매 내역 출력
+            테이블에 예매 정보를 출력한다.
+        기능 4 : 총 예매 인원 계산
+            전체 예매 인원을 계산하여 출력한다.
+        기능 5 : 총 결제 금액 계산
+            전체 예매 금액을 계산하여 출력한다.
+        기능 6 : 영화 검색
+            제목으로 영화를 검색한다.
+        */
+        let movieList = [
+            { title: "인터스텔라", price: 12000 },
+            { title: "탑건", price: 13000 },
+            { title: "엘리멘탈", price: 11000 }
+        ];
+
+        let visitMovie = [];
+
+        function movieSelect() {
+            let movieSelect = movieList.map((movie) => {
+                return `<option>${movie.title} | ${movie.price}</option>`
+            })
+            document.getElementById("movieSelect").innerHTML = movieSelect.join("");
+        }
+
+        function movieInput() {
+            let title = String(document.getElementById("movieSelect").value).split(" ");
+            let count = document.getElementById("count").value
+            visitMovie.push({
+                title: title[0],
+                price: +title[2],
+                count: +count,
+                countAll: +title[2] * +count
+            });;
+            console.log(visitMovie);
+            output = visitMovie.map((movie) => {
+                console.log(movie);
+                return `<tr><td>${movie.title}</td><td>${movie.price}</td><td>${movie.count}</td><td>${movie.countAll}</td></tr>`;
+            })
+            console.log(output);
+            document.getElementById("visitMovie").innerHTML = output.join("");
+        }
+
+        movieSelect();
     </script>
 </body>
 
