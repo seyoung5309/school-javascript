@@ -8,6 +8,7 @@
   <body>
     <input type="date" name="" id="startDate" />
     <input type="date" name="" id="endDate" />
+    <script src="../js/common.js"></script>
     <script>
       // 객체 생성하기
       let now = new Date();
@@ -18,7 +19,7 @@
       let d = new Date(2026, 4, 5, 13, 10, 0);
       console.log(d);
 
-      // 3. get() 내장 함수
+      // 3. get() 내장 함수 (반환 타입: number)
       let year = now.getFullYear();
       let month = now.getMonth();
       let day = now.getDay(); // 요일
@@ -47,7 +48,7 @@
 
       let beforeSevendays = 0;
 
-      // 6. 기준시 지원 : 1970/01/01/00:00:00 (Date 객체의 기준시)
+      // 7. 기준시 지원 : 1970/01/01/00:00:00 (Date 객체의 기준시)
       // 7일의 밀리초 = 24 * 60 * 60 * 1000 * 7
       let d2 = new Date(0);
       console.log(d2);
@@ -55,13 +56,56 @@
       let d3 = new Date(24 * 60 * 60 * 1000 * 7);
       console.log(d3);
 
+      // 8. getTime() : 기준일로부터 현재까지의 밀리초를 구하는 함수
       let current = now.getTime();
       console.log(current);
+
+      let oneDay = 24 * 60 * 60 * 1000;
+      console.log(oneDay);
+
+      // 오늘 날짜가 찍힘
+      console.log(new Date(current));
 
       // 6. 오늘을 기준으로 7일 전을 YYYY-MM-DD 포맷으로 id="startDate"
       beforeSevendays = new Date(current - d3.getTime());
       beforeSevendays_date = `${beforeSevendays.getFullYear()}-${String(beforeSevendays.getMonth() + 1).padStart(2, "0")}-${String(beforeSevendays.getDate()).padStart(2, 0)}`;
       document.getElementById("startDate").value = beforeSevendays_date;
+
+      // 9. 함수 : getIntervalDate() 오늘을 기준으로 며칠 전, 후를 구하는 함수.
+      // (이 함수는 common.js로 이동함.)
+
+      console.log(getIntervalDate(-3)); // 6월 26일
+      console.log(getIntervalDate(7)); // 7월 6일
+
+      // 10. 함수 : getIntervalDateFormat() 오늘을 기준으로 며칠 전, 후를 일정한 형식으로 구하는 함수
+      let getIntervalDateFormat = (day, format) => {
+        let date = new Date(new Date().getTime() + 24 * 60 * 60 * 1000 * day);
+
+        let tmp = "";
+        let arr = [];
+        for (let f of format) {
+          if (f < "A" || f > "z") {
+            arr.push(tmp);
+            arr.push(f);
+            tmp = "";
+            continue;
+          }
+          tmp += f;
+        }
+        arr.push(tmp);
+
+        arr[0] =
+          arr[0].length == 2
+            ? String(date.getFullYear()).slice(2)
+            : String(date.getFullYear());
+        arr[2] = String(date.getMonth() + 1).padStart(arr[4].length, 0);
+        arr[4] = String(date.getDate()).padStart(arr[4].length, 0);
+
+        console.log(arr.join(""));
+      };
+
+      getIntervalDateFormat(5, "YY-MM-DD"); // 26-07-04
+      getIntervalDateFormat(-7, "YYYY-MM-DD"); // 2026-06-26
     </script>
   </body>
 </html>
