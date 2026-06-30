@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let getIntervalDateFormat2 = (day, format) => {
+        let date = new Date(new Date().getTime() + 24 * 60 * 60 * 1000 * day);
+        let result = format;
+        result = result.replace(/Y/g, String(date.getFullYear()));
+        result = result.replace(
+          /M/g,
+          String(date.getMonth() + 1).padStart(2, 0),
+        );
+        result = result.replace(/D/g, String(date.getDate()).padStart(2, 0));
+        console.log(result);
+      };
+
+      getIntervalDateFormat2(5, "YY-MM-DD"); // 26-07-04
+      getIntervalDateFormat2(3, "YYYY/MM/DD");
+      getIntervalDateFormat2(3, "YY.MM.DD.");
+    </script>
+  </body>
+</html>

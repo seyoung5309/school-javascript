@@ -78,6 +78,7 @@
       console.log(getIntervalDate(7)); // 7월 6일
 
       // 10. 함수 : getIntervalDateFormat() 오늘을 기준으로 며칠 전, 후를 일정한 형식으로 구하는 함수
+      // 11. (/, ., - 기호에 관계 없이)
       let getIntervalDateFormat = (day, format) => {
         let date = new Date(new Date().getTime() + 24 * 60 * 60 * 1000 * day);
 
@@ -106,6 +107,30 @@
 
       getIntervalDateFormat(5, "YY-MM-DD"); // 26-07-04
       getIntervalDateFormat(-7, "YYYY-MM-DD"); // 2026-06-26
+      getIntervalDateFormat(3, "YYYY/MM/DD");
+      getIntervalDateFormat(3, "YY.MM.DD.");
+      getIntervalDateFormat(3, "YYYY년MM월DD일");
+
+      // ---------------------
+
+      // 11. (이미 10번에서 해버림) getIntervalDateFormat2() : JS처럼 수정하기
+      console.log("=====");
+      let getIntervalDateFormat2 = (day, format) => {
+        let date = new Date(new Date().getTime() + 24 * 60 * 60 * 1000 * day);
+        let result = format;
+        result = result.replace("YYYY", String(date.getFullYear()));
+        result = result.replace("YY", String(date.getFullYear()).slice(2));
+        result = result.replace(
+          "MM",
+          String(date.getMonth() + 1).padStart(2, 0),
+        );
+        result = result.replace("DD", String(date.getDate()).padStart(2, 0));
+        console.log(result);
+      };
+
+      getIntervalDateFormat2(5, "YY-MM-DD"); // 26-07-04
+      getIntervalDateFormat2(3, "YYYY/MM/DD");
+      getIntervalDateFormat2(3, "YY.MM.DD.");
     </script>
   </body>
 </html>
