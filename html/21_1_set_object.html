@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /* 실무에서 set을 가장 유용하게 사용하는 경우는
+        "데이터의 중복을 허용하지 않으면서 특정 데이터가 존재하는지 빠른 속도로 찾아내야 하는 경우"
+        대표적인 예시로는 '최근 본 상품 목록(중복 제거)', 찜한 상품 실시간 활성화 여부 체크 */
+
+      const recentView = new Set();
+      const wishList = new Set();
+
+      // 1. 둘러 본 상품을 최근 본 상품 목록에 넣는 함수
+      const viewProduct = (product) => {
+        recentView.add(product);
+      };
+
+      viewProduct("맥북");
+      viewProduct("맥북");
+      viewProduct("맥북");
+      viewProduct("셔츠");
+      viewProduct("바지");
+      viewProduct("셔츠");
+
+      console.log(`최근 본 상품`, recentView);
+
+      // ***세트를 배열로 형변환
+      let array = [...recentView];
+      console.log(array);
+
+      // 2. 찜 추가, 해제를 토클로 만드는 함수
+      const toggleWishList = (product) => {
+        if (wishList.has(product)) {
+          wishList.delete(product);
+          console.log(`${product}의 찜이 해제되었습니다.`);
+        } else {
+          wishList.add(product);
+          console.log(`${product}의 찜이 추가되었습니다.`);
+        }
+      };
+      toggleWishList("사탕");
+      toggleWishList("사탕");
+
+      console.log(wishList);
+    </script>
+  </body>
+</html>
