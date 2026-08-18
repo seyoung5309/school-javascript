@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 객체는 순서가 없다. (iterable이 아니다.)
+      let oPerson = {};
+      oPerson.name = "강하윤";
+      oPerson.number = 2101;
+      oPerson.email = "kang@gmail.com";
+      oPerson["185"] = 75;
+
+      let count = 0;
+
+      for (let o in oPerson) {
+        console.log(o + " : " + oPerson[o]);
+        count++;
+      }
+      console.log("요소의 총 갯수 : " + count + " 개");
+
+      // Map
+      let personMap = new Map();
+      personMap.set("name", "강하윤");
+      personMap.set("number", 2105);
+      personMap.set("email", "kang@gmail.com");
+      personMap.set(185, 75);
+      personMap.forEach((value, key) => {
+        console.log(`${key} : ${value}`);
+        count++;
+      });
+      console.log("요소의 총 갯수 : " + personMap.size + " 개");
+    </script>
+  </body>
+</html>

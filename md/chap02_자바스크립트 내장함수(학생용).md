@@ -218,7 +218,25 @@
   - key 와 value 로 이루어진 객체, 마치 Object 와 유사
   - key에 문자가 아닌 값이 올 수 있으므로, 키가 문자열이 아닌 object를 만들고자 할 경우 대체제로 활용이 가능
   - 파이선의 딕셔너리와 유사
+
   - Object 와 Map의 차이
+
+  | . | Object | Map |
+  | key 문자만 가능 | 모든 타입 가능 |
+  | size property | 속성 제공 X | size 속성 제공 |
+  | for ...in... 의 순서 | 보장 X | 보장 O |
+  - 주요 메서드 : key, values, set, get, has, delete, clear
+  - map은 iterable 객체 이므로 forEach()를 사용하면 매우 효과적이다. map이름.forEach(함수)
+
+  ```
+  personMap.forEach((person) => {
+    console.log(person);
+  });
+
+  map이름.forEach((값, 키) => {
+    console.log(값, 키);
+  });
+  ```
 
 ---
 
