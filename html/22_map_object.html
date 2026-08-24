@@ -32,7 +32,42 @@
         console.log(`${key} : ${value}`);
         count++;
       });
+
+      // 2. size 속성
       console.log("요소의 총 갯수 : " + personMap.size + " 개");
+
+      // 3. 키만 가져오기
+      for (const key of personMap.keys()) {
+        console.log(key);
+      }
+
+      // 4. 값만 가져오기
+      for (const value of personMap.values()) {
+        console.log(value);
+      }
+
+      // 5. get() : 특정 키에 대한 값을 가져오기
+      console.log(personMap.get("name"));
+
+      // 6. has() : 키의 존재 여부
+      console.log(personMap.has("name"));
+      console.log(personMap.has("phone"));
+
+      // 7. delete() : 해당하는 item 삭제
+      personMap.delete("name");
+      for (let o in oPerson) {
+        console.log(o + " : " + oPerson[o]);
+        count++;
+      }
+      console.log("요소의 총 갯수 : " + count + " 개");
+
+      // 8. clear() : 모두 삭제
+      personMap.clear();
+      for (let o in oPerson) {
+        console.log(o + " : " + oPerson[o]);
+        count++;
+      }
+      console.log("요소의 총 갯수 : " + count + " 개");
     </script>
   </body>
 </html>

@@ -225,7 +225,7 @@
   | key 문자만 가능 | 모든 타입 가능 |
   | size property | 속성 제공 X | size 속성 제공 |
   | for ...in... 의 순서 | 보장 X | 보장 O |
-  - 주요 메서드 : key, values, set, get, has, delete, clear
+  - 주요 메서드 : key, values, set(추가하는 메서드), get, has, delete, clear
   - map은 iterable 객체 이므로 forEach()를 사용하면 매우 효과적이다. map이름.forEach(함수)
 
   ```

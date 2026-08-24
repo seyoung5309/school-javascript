@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /* 개발자들은 왜 일반 객체대신 map을 쓸까요?
+          1. 갯수 구하기 쉬움
+          2. 자료를 추가하고 삭제하는 속도가 빠름
+          3. key에 무엇이든 올 수 있음 */
+
+      /* 실무 예제: 온라인 쇼핑몰 장바구니 관리
+          쇼핑몰 웹사이트를 만들 때 장바구니는 아래 기능이 반드시 필요합니다.
+          1. 상품 담기 (추가)
+          2. 이미 담긴 상품인지 확인하고 수량 늘리기 (조회 및 수정)
+          3. 상품 빼기 (삭제)
+          4. 장바구니에 총 몇 종류의 상품이 있는지 확인 (개수 파악) */
+
+      const myShoppingCart = new Map();
+
+      // 이미 장바구니에 담겨있는 물건
+      myShoppingCart.set("pro_01", {
+        name: "축구공",
+        price: 150000,
+        quantity: 1,
+      });
+      myShoppingCart.set("pro_03", {
+        name: "노트북",
+        price: 3000000,
+        quantity: 1,
+      });
+
+      // 내가 추가하려고 하는 item
+      let userInput = "pro_01";
+      // userInput = "pro_045"
+
+      /* 1. 장바구니에 있는지 확인 =>
+          2. 있다면 => 추가할래? => 예 : quantity++
+                               => 아니오 :
+          3. 없다면 => 추가 완료 message 출력 */
+
+      //   if (myShoppingCart.has(userInput)) {
+      //     if (
+      //       prompt(
+      //         "장바구니에 이미 상품이 존재합니다. 추가하시겠습니가? (예/아니오)",
+      //       ) === "예"
+      //     ) {
+      //       myShoppingCart.get(userInput).quantity++;
+      //       console.log(
+      //         "상품의 갯수를 추가하였습니다.",
+      //         myShoppingCart.get(userInput),
+      //       );
+      //     } else {
+      //       console.log("취소하였습니다.");
+      //     }
+      //   } else {
+      //     myShoppingCart.set(userInput, { name: "미정", price: 0, quantity: 1 });
+      //     console.log("추가 완료 하였습니다.");
+      //   }
+
+      // 장바구니의 전체 내역 보여주기, 장바구니에 들어있는 아이템의 총 갯수, 금액
+      let price = 0,
+        count = 0;
+      myShoppingCart.forEach((value, key) => {
+        console.log(
+          `상품명 : ${value.name} | 가격 : ${value.price.toLocaleString()} | 개수 : ${value.quantity}`,
+        );
+        price += value.price * value.quantity;
+        count += value.quantity;
+      });
+      console.log("==========");
+      console.log(
+        `총 개수 : ${count} | 총 합산 금액 : ${price.toLocaleString()}`,
+      );
+    </script>
+  </body>
+</html>
