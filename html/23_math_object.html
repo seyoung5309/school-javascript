@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // new Map() O / new Math() X
+
+      // 1. round() : 반올림
+      console.log(Math.round(2.1));
+      console.log(Math.round(2.9));
+
+      // 2. ceil() : 올림
+      console.log(Math.ceil(2.1));
+      console.log(Math.ceil(2.9));
+
+      // 페이징 : 게시글이 51개 => 페이지 10개씩 게시 => 페이지 6개 필요
+
+      let total = 51;
+      let countPerPage = 10;
+      let totalPage = Math.ceil(total / countPerPage);
+      console.log(`총 페이지 수 : ${totalPage}`);
+
+      // 3. floor() : 내림
+      console.log(Math.floor(2.1));
+      console.log(Math.floor(2.9));
+      console.log(Math.floor(-2.1));
+      console.log(Math.floor(-2.9));
+
+      // 4. trunc() : 소수점 이하는 잘라내기
+      console.log(Math.trunc(2.1));
+      console.log(Math.trunc(2.9));
+      console.log(Math.trunc(-2.1));
+      console.log(Math.trunc(-2.9));
+
+      // 5. sign() : 양수라면 1, 음수라면 -1, 0이라면 0.
+      console.log(Math.sign(2.1));
+      console.log(Math.sign(2.9));
+      console.log(Math.sign(-2.1));
+
+      // 6. pow() : 제곱값
+      console.log(Math.pow(2, 5));
+      console.log(Math.pow(2, -5));
+
+      // 7. sqrt() : 제곱근값
+      console.log(Math.sqrt(64));
+      console.log(Math.sqrt(625, 4));
+
+      // 8. abs() : 절대값
+      console.log(Math.abs(123));
+      console.log(Math.abs(-123));
+
+      // 9. min() : 최소값
+      console.log(Math.min(1, -4, 6, 7, 8, 9, 10));
+
+      // 10. max() : 최대값
+      console.log(Math.max(1, -4, 6, 7, 8, 9, 10));
+
+      // 11. random() : 0 <= x < 1
+      console.log(Math.random());
+
+      // 과제
+      // 활용 1. 0 ~ 9
+      console.log(Math.ceil(Math.random() * 10) - 1);
+
+      // 활용 2. 1 ~ 10
+      console.log(Math.ceil(Math.random() * 10) + 1);
+
+      // 활용 3. 1 ~ 100
+      console.log(Math.ceil(Math.random() * 100) + 1);
+
+      // 활용 4. min과 max 사이의 읨의의 수를 발생시키는 함수 getRandomInteger(min, max) 작성
+      function getRandomInteger(min, max) {
+        return max - Math.floor(Math.random() * min);
+      }
+      console.log(getRandomInteger(3, 5));
+    </script>
+  </body>
+</html>
