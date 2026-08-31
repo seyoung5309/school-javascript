@@ -72,11 +72,13 @@
       // 활용 3. 1 ~ 100
       console.log(Math.ceil(Math.random() * 100) + 1);
 
+      console.log("=== 과제 ===");
+
       // 활용 4. min과 max 사이의 읨의의 수를 발생시키는 함수 getRandomInteger(min, max) 작성
       function getRandomInteger(min, max) {
-        return max - Math.floor(Math.random() * min);
+        return min + Math.floor(Math.random() * (max - min + 1));
       }
-      console.log(getRandomInteger(3, 5));
+      console.log(getRandomInteger(5, 50));
     </script>
   </body>
 </html>
