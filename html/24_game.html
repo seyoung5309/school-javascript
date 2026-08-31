@@ -24,7 +24,8 @@
       <h3 id="answer1">나 : 대기중</h3>
       <h3 id="answer2">컴퓨터 대기중</h3>
     </div>
-    <p id="re"></p>
+    <button id="re" onclick="reGame()">진행중</button>
+
     <script src="../js/common.js"></script>
     <script>
       let input = 0;
@@ -33,11 +34,8 @@
       let htmlOutput = (answer) => {
         let me = input == 0 ? "가위" : input == 1 ? "바위" : "보";
         let you = computer == 0 ? "가위" : computer == 1 ? "바위" : "보";
-        let output1 = `나 : ${me}`;
-        let output2 = `컴퓨터 : ${you}`;
-        console.log(input, computer);
-        document.getElementById("answer1").innerText = output1;
-        document.getElementById("answer2").innerText = output2;
+        document.getElementById("answer1").innerText = `나 : ${me}`;
+        document.getElementById("answer2").innerText = `컴퓨터 : ${you}`;
 
         let result = 0;
         if (answer >= 1) {
@@ -47,25 +45,23 @@
         } else {
           result = "무승부";
         }
+
         document.getElementById("result").innerText = `결과 : ${result}`;
 
-        // console.log(document.getElementById("re"));
-        // document.getElementById("re") = `<button>다시하기</button>`;
+        console.log(document.getElementById("re"));
+        document.getElementById("re").innerText = `다시하기`;
       };
 
       let userInput = (num) => {
-        console.log(`사용자의 답변 : ${num}`);
-
-        if (input) {
-          return;
-        }
+        // 사용자와 컴퓨터의 가위바위보 승부 결과
+        if (input) return;
 
         input = num;
         computer = getRandomInteger(0, 2);
         let answer = 0;
 
         switch (input) {
-          case 0:
+          case 0: // 사용자 : 가위
             if (computer == 1) {
               answer = -1;
             } else if (computer == 2) {
@@ -74,7 +70,7 @@
               answer = 0;
             }
             break;
-          case 1:
+          case 1: // 사용자 : 바위
             if (computer == 2) {
               answer = -1;
             } else if (computer == 0) {
@@ -83,7 +79,7 @@
               answer = 0;
             }
             break;
-          case 2:
+          case 2: // 사용자 : 보
             if (computer == 0) {
               answer = -1;
             } else if (computer == 1) {
@@ -92,7 +88,17 @@
               answer = 0;
             }
         }
+
         htmlOutput(answer);
+      };
+
+      // 다시하기
+      let reGame = () => {
+        input = 0;
+        document.getElementById("re").innerText = `진행중`;
+        document.getElementById("result").innerText = `결과`;
+        document.getElementById("answer1").innerText = "나 : 대기중";
+        document.getElementById("answer2").innerText = "컴퓨터 : 대기중";
       };
     </script>
   </body>

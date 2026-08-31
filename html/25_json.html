@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let person = {
+        name: "강하윤",
+        age: 18,
+        tel: "010-1234-5678",
+        address: "서울시",
+        email: "Kang@gmail.com",
+      };
+
+      let arr = [1, 2, 3, 4];
+
+      console.log(person);
+      console.log(JSON.stringify(person));
+      console.log(JSON.stringify(arr));
+
+      const jsonPerson = JSON.stringify(person);
+      console.log(jsonPerson);
+
+      console.log(JSON.parse(jsonPerson));
+    </script>
+  </body>
+</html>
