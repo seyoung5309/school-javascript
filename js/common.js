@@ -33,3 +33,11 @@ let getIntervalDate = (date) => {
     String(result.getDate()).padStart(2, 0)
   );
 };
+
+/**
+ * 최소값과 최대값을 받아 랜덤한 수를 구하는 함수
+ **/
+
+function getRandomInteger(min, max) {
+  return min + Math.floor(Math.random() * (max - min + 1));
+}
