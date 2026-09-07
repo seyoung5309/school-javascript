@@ -6,6 +6,40 @@
     <title>Document</title>
   </head>
   <body>
-    <script></script>
+    <script>
+      // alert("Hello World!");
+
+      const doDelete = () => {
+        const pwd = "1234";
+        let userInput = prompt("비밀번호를 입력하시오."); // window는 root 개념이기에 생략해도 된다. window.prompt()
+        if (userInput === pwd) {
+          if (window.confirm("정말 삭제하시겠습니까?")) {
+            console.log("삭제 완료");
+          } else {
+            console.log("삭제 취소");
+          }
+        } else {
+          alert("비밀번호가 일치하지 않습니다.");
+        }
+      };
+
+      // doDelete();
+
+      const openNaver = () => {
+        window.open("https://naver.com");
+      };
+
+      // openNaver();
+
+      // setTimeout(function () {
+      //   window.open("https://naver.com");
+      // }, 3000); // 몇 초 후에 동작할지 뒤에 밀리초로 작성.
+
+      const myInterval = setInterval(function () {
+        console.log("2초마다 생성");
+      }, 2000);
+
+      clearInterval(myInterval);
+    </script>
   </body>
 </html>
