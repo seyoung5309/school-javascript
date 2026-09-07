@@ -34,6 +34,16 @@ let getIntervalDate = (date) => {
   );
 };
 
+let getIntervalDateFormat2 = (day, format) => {
+  let date = new Date(new Date().getTime() + 24 * 60 * 60 * 1000 * day);
+  let result = format;
+  result = result.replace("YYYY", String(date.getFullYear()));
+  result = result.replace("YY", String(date.getFullYear()).slice(2));
+  result = result.replace("MM", String(date.getMonth() + 1).padStart(2, 0));
+  result = result.replace("DD", String(date.getDate()).padStart(2, 0));
+  console.log(result);
+};
+
 /**
  * 최소값과 최대값을 받아 랜덤한 수를 구하는 함수
  **/
