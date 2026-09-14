@@ -6,6 +6,30 @@
     <title>Document</title>
   </head>
   <body>
-    <script></script>
+    <script>
+      // template iiteral = ``
+      // toString Method 호출
+      //주의! 객체일 때
+      function fullName(firstName, lastName) {
+        console.log("Hello " + firstName + " " + lastName + " !");
+        console.log(`Hello ${firstName} ${lastName} !`);
+      }
+      fullName("Brad", "Pitt");
+
+      const myMap = new Map();
+      myMap.set("name", "홍길동");
+      myMap.set("phone", "010-1234-5678");
+      myMap.set("address", "신림동");
+
+      console.log(myMap);
+      console.log(`myMap : ${myMap}`); // 주의! Object Map으로 반환한다.
+
+      const arr = [1, 2, 3, 4, 5];
+      console.log(`myArr : ${arr}`);
+
+      myMap.forEach((key, value) => {
+        console.log(`${key} : ${value}`);
+      });
+    </script>
   </body>
 </html>
