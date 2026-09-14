@@ -34,7 +34,7 @@ let getIntervalDate = (date) => {
   );
 };
 
-let getIntervalDateFormat2 = (day, format) => {
+let getIntervalDateFormat2 = (day, format = "YYYY.MM.DD") => {
   let date = new Date(new Date().getTime() + 24 * 60 * 60 * 1000 * day);
   let result = format;
   result = result.replace("YYYY", String(date.getFullYear()));
@@ -42,6 +42,7 @@ let getIntervalDateFormat2 = (day, format) => {
   result = result.replace("MM", String(date.getMonth() + 1).padStart(2, 0));
   result = result.replace("DD", String(date.getDate()).padStart(2, 0));
   console.log(result);
+  return result;
 };
 
 /**

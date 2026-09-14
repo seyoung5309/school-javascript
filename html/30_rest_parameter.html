@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let sum2 = (n1, n2) => {
+        return n1 + n2;
+      };
+
+      console.log(sum2(1, 2));
+
+      let sum3 = (n1, n2, n3) => {
+        return n1 + n2 + n3;
+      };
+
+      console.log(sum3(1, 2, 3));
+
+      let sum4 = (n1, n2, n3, n4) => {
+        return n1 + n2 + n3 + n4;
+      };
+
+      let sumArr = (...arr) => {
+        let result = 0;
+        for (let i of arr) {
+          result += i;
+        }
+        return result;
+      };
+
+      console.log(sumArr(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
+
+      let sumArr2 = (...arr) => {
+        return arr.reduce((sum, arr) => {
+          return sum + arr;
+        }, 0);
+      };
+
+      console.log(sumArr2(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
+
+      // ECMA 6버전부터 매개 변수의 개수가 정해져 있지 않을 경우 ...
+      const sumRest = (...nums) => {
+        let sum = 0;
+        for (const n of nums) {
+          sum += n;
+        }
+        return sum;
+      };
+
+      console.log(sumRest(1, 2, 3, 4, 5));
+    </script>
+  </body>
+</html>
