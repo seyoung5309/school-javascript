@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // XMLHttpRequest 객체를 이용하여 db를 조회해보기
+
+      function getPosts() {
+        // 1. 객체 생성
+        const xhr = new XMLHttpRequest();
+
+        // 2. 요청 보낼 준비
+        xhr.open("GET", "http://localhost:3000/posts");
+
+        // 3. 컨텐츠 타입 설정
+        xhr.setRequestHeader("content-type", "application/json");
+
+        // 4. 요청(request) 전송
+        xhr.send();
+
+        // 5. 응답(response) 함수
+        xhr.onload = () => {
+          if (xhr.status == 200) {
+            const result = JSON.parse(xhr.response);
+            console.log(result);
+          } else {
+            console.log("error");
+            console.log(xhr.status, xhr.statusText);
+          }
+        };
+      }
+
+      function getComments() {
+        const xhr = new XMLHttpRequest();
+
+        xhr.open("GET", "http://localhost:3000/comments");
+
+        xhr.setRequestHeader("content-type", "application/json");
+
+        xhr.send();
+
+        xhr.onload = () => {
+          if (xhr.status == 200) {
+            const result = JSON.parse(xhr.response);
+            console.log(result);
+          } else {
+            console.log("error");
+            console.log(xhr.status, xhr.statusText);
+          }
+        };
+      }
+
+      function getProfile() {
+        const xhr = new XMLHttpRequest();
+
+        xhr.open("GET", "http://localhost:3000/profile");
+
+        xhr.setRequestHeader("content-type", "application/json");
+
+        xhr.send();
+
+        xhr.onload = () => {
+          if (xhr.status == 200) {
+            const result = JSON.parse(xhr.response);
+            console.log(result);
+          } else {
+            console.log("error");
+            console.log(xhr.status, xhr.statusText);
+          }
+        };
+      }
+
+      function getData(endpoint) {
+        const xhr = new XMLHttpRequest();
+
+        xhr.open("GET", `http://localhost:3000/${endpoint}`);
+
+        xhr.setRequestHeader("content-type", "application/json");
+
+        xhr.send();
+
+        xhr.onload = () => {
+          if (xhr.status == 200) {
+            const result = JSON.parse(xhr.response);
+            console.log(result);
+          } else {
+            console.log("error");
+            console.log(xhr.status, xhr.statusText);
+          }
+        };
+      }
+
+      getPosts();
+      getComments();
+      getProfile();
+
+      getData("posts");
+      getData("comments");
+      getData("profile");
+
+      getData("helloworld"); // status=404 / statusText="Not Found"
+    </script>
+  </body>
+</html>
