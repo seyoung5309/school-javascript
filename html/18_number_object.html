@@ -1,11 +1,13 @@
 <!doctype html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-  </head>
-  <body>
+</head>
+
+<body>
     <!-- id : JS에서 제어하기 위해 부여 -->
     <label for="n1">숫자1 :</label>
     <input type="number" id="n1" /> <br />
@@ -16,65 +18,66 @@
     <p>결과 : <span id="result"></span></p>
 
     <script>
-      // 과제
-      // function doSum() {
-      //   let n1 = Number(document.getElementById("n1").value);
-      //   let n2 = Number(document.getElementById("n2").value);
-      //   let sum = n1 + n2;
+        // 과제
+        // function doSum() {
+        //   let n1 = Number(document.getElementById("n1").value);
+        //   let n2 = Number(document.getElementById("n2").value);
+        //   let sum = n1 + n2;
 
-      //   document.getElementById("result").innerText = sum;
-      // }
+        //   document.getElementById("result").innerText = sum;
+        // }
 
-      // 수업 실습
-      const doSum = () => {
-        // 1. 두 수 읽기    2. 변환
-        let number1 = parseInt(document.getElementById("n1").value);
-        let number2 = parseInt(document.getElementById("n2").value);
-        // 3. 계산
-        let sum = number1 + number2;
-        // 4. 출력
-        document.getElementById("result").innerHTML = sum;
-      };
+        // 수업 실습
+        const doSum = () => {
+            // 1. 두 수 읽기    2. 변환
+            let number1 = parseInt(document.getElementById("n1").value);
+            let number2 = parseInt(document.getElementById("n2").value);
+            // 3. 계산
+            let sum = number1 + number2;
+            // 4. 출력
+            document.getElementById("result").innerHTML = sum;
+        };
 
-      let num = 67978;
-      console.log(num);
+        let num = 67978;
+        console.log(num);
 
-      // 1. toString() : 숫자 -> 문자열
-      let strNum = num.toString();
-      console.log(strNum);
+        // 1. toString() : 숫자 -> 문자열
+        let strNum = num.toString();
+        console.log(strNum);
 
-      // 2. perseInt() : 문자열 -> 정수, 전역 함수(주인:Windows(전역 객체))
-      let strInt = parseInt(strNum);
-      console.log(strInt);
+        // 2. perseInt() : 문자열 -> 정수, 전역 함수(주인:Windows(전역 객체))
+        let strInt = parseInt(strNum);
+        console.log(strInt);
 
-      // 3. parseFloat() : 문자열 -> 실수
-      let pi = "3.141592";
-      let strFlo = parseFloat(pi);
-      console.log(strFlo);
+        // 3. parseFloat() : 문자열 -> 실수
+        let pi = "3.141592";
+        let strFlo = parseFloat(pi);
+        console.log(strFlo);
 
-      // 4. toExponential() : 지수표기법
-      let x = 100.3456;
-      console.log(x, x.toExponential());
+        // 4. toExponential() : 지수표기법
+        let x = 100.3456;
+        console.log(x, x.toExponential());
 
-      // 5. toFixed() : 소수점 몇째 자리까지 보여줄지 결정하는 함수 (반올림)
-      console.log(x.toFixed(0)); // 100
-      console.log(x.toFixed(1)); // 100.3
-      console.log(x.toFixed(2)); // 100.35
-      console.log(x.toFixed(3)); // 100.346
+        // 5. toFixed() : 소수점 몇째 자리까지 보여줄지 결정하는 함수 (반올림)
+        console.log(x.toFixed(0)); // 100
+        console.log(x.toFixed(1)); // 100.3
+        console.log(x.toFixed(2)); // 100.35
+        console.log(x.toFixed(3)); // 100.346
 
-      console.log(strFlo.toFixed(2));
+        console.log(strFlo.toFixed(2));
 
-      console.log("\n");
+        console.log("\n");
 
-      // 6. toPrecision() : 정수와 소수 부분을 합쳐서 몇 자리 보여줄지 결정하는 함수
-      //   console.log(x.toPrecision(0)); // 100
-      console.log(x.toPrecision(1));
-      console.log(x.toPrecision(2));
-      console.log(x.toPrecision(3));
-      console.log(x.toPrecision(4));
-      console.log(x.toPrecision(5));
+        // 6. toPrecision() : 정수와 소수 부분을 합쳐서 몇 자리 보여줄지 결정하는 함수
+        //   console.log(x.toPrecision(0)); // 100
+        console.log(x.toPrecision(1));
+        console.log(x.toPrecision(2));
+        console.log(x.toPrecision(3));
+        console.log(x.toPrecision(4));
+        console.log(x.toPrecision(5));
     </script>
-  </body>
+</body>
+
 </html>
 
-<!-- span이라는 태그가 있으며, 인라인을 포함한다? -->
+<!-- span이라는 태그가 있으며, 인라인을 포함한다 -->
