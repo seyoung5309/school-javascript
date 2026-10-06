@@ -1,0 +1,32 @@
+<!-- // 문제 11. 코드를 실행했을 때 화면에 대한 설명으로 옳은 것을 고르시오.
+    1. 항목 3개가 정상적으로 출력된다.
+    2. 항목 3개가 출력되고, 항목 사이에 ,가 함께 나타난다.
+    3. [object Object]가 출력된다.
+    4. TypeError가 발생한다.
+    5. 아무것도 출력되지 않는다.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <ul id="list"></ul>
+    <script>
+        const products = [
+            { id: 1, name: "펜" },
+            { id: 2, name: "노트" },
+            { id: 3, name: "지우개" },
+        ];
+
+        const rows = products.map((p) => `<li>${p.name}</li>`);
+
+        document.getElementById("list").innerHTML = rows;</script>
+</body>
+
+</html>
