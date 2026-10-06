@@ -1,0 +1,50 @@
+<!--
+    퀴즈 2, Live Server를 실행했을 때, 다음과 같이 출력되도록 (가), (나), (다)에 들어갈 알맞은 것을 고르시오.
+    1. (가) in  (나) push  (다) join()
+    2. (가) in  (나) push  (다) join("")
+    3. (가) of  (나) unshift  (다) join()
+    4. (가) of  (나) unshift  (다) join("")
+    5. (가) of  (나) unshift  (다) join(",")
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <table class="table1">
+        <thead>
+            <th>음료</th>
+            <th>가격</th>
+        </thead>
+        <tbody id="tbody1"></tbody>
+    </table>
+
+    <script>
+        const search = () => {
+            const drinkList = [
+                { name: "오렌지", price: 1000 },
+                { name: "파워에이드", price: 1200 },
+                { name: "커피", price: 700 },
+                { name: "보리음료", price: 1200 },
+                { name: "코카콜라", price: 1800 },
+            ];
+            let tagsArray = [];
+            for (drink of drinkList) { // of == (가)
+                tagsArray.unshift( // unshift == (나) 
+                    `<tr><td>${drink.name}</td><td>${drink.price}</td></tr>`,
+                );
+            }
+            document.getElementById("tbody1").innerHTML = tagsArray.join(""); // join() == (다)
+        };
+
+        search();
+    </script>
+</body>
+
+</html>

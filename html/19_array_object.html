@@ -276,7 +276,7 @@
         let arr1 = ["A", "B"];
         let arr2 = ["C", "D"];
         let arr3 = ["E", "F"];
-        let arr4 = arr1.concat(arr2);
+        let arr4 = arr1.concat(arr2); //['A', 'B', 'C', 'D', 'E', 'F', 'G']
         let arr5 = arr1.concat(arr2, arr3); // 혹은 arr1.concat(arr2).concat(arr3);
         console.log(arr4);
         console.log(arr5);
@@ -303,6 +303,7 @@
         console.log(brands);
 
         // 9. slice(start, end) : end - 1까지 잘라내 배열로 반환
+        console.log("SLICE 부분!!")
         // brands = ['애플', '하이닉스', '테슬라', '구글', '메타', '마이크로소프트'];
         console.log(brands.slice(2, 5)); // 2 ~ 4까지의 인덱스 값을 받아옴
 
