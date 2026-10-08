@@ -122,9 +122,7 @@
             let result = format;
             result = result.replace("YYYY", String(date.getFullYear()));
             result = result.replace("YY", String(date.getFullYear()).slice(2));
-            result = result.replace(
-                "MM",
-                String(date.getMonth() + 1).padStart(2, 0),
+            result = result.replace("MM", String(date.getMonth() + 1).padStart(2, 0),
             );
             result = result.replace("DD", String(date.getDate()).padStart(2, 0));
             console.log(result);

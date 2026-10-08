@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="date" name="" id="endDate" />
+    <script>
+        now = new Date();
+        let today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
+        console.log(today);
+        document.getElementById("endDate").value = today;
+
+        let before7days = new Date(2026, 10, 7 - 10);
+        console.log('7일전 : ', before7days);
+    </script>
+</body>
+
+</html>
