@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // XMLHttpRequest 객체를 이용하여 db를 조회해보기
+      const url = "http://localhost:3000/";
+
+      function getData(endpoint) {
+        // 1. 객체 생성
+        const xhr = new XMLHttpRequest();
+
+        //// 2. 요청 보낼 준비
+        xhr.open("GET", `http://localhost:3000/${endpoint}`);
+
+        // 3. 컨텐츠 타입 설정(charset=utf-8)
+        xhr.setRequestHeader("content-type", "application/json");
+
+        // 4. 요청(request) 함수
+        xhr.send();
+
+        // 5. 응답(response) 함수
+        xhr.onload = () => {
+          if (xhr.status == 200) {
+            const result = JSON.parse(xhr.response);
+            console.log(xhr.response); // 출력 => rendering()
+
+            return result;
+          } else {
+            console.log("error");
+            console.log(xhr.status, xhr.statusText);
+          }
+        };
+      }
+
+      const data = getData("posts");
+
+      console.log(data);
+
+      /*
+        단점
+        1. 비동기 통신이므로 js의 실행 순서가 반드시 보장되지 않는다.
+        => send() 실행 후 결과 리턴을 기다리지 않고 다른 명령을 실행한다.
+        2. 결과의 화면 rendering을 재황용하기 어렵다.
+        3. undefined 결과 
+      */
+    </script>
+  </body>
+</html>

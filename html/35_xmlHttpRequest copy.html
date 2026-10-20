@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // XMLHttpRequest 객체를 이용하여 db를 조회해보기
+      const url = "http://localhost:3000/";
+
+      // function getPosts() {
+      //   // 1. 객체 생성
+      //   const xhr = new XMLHttpRequest();
+
+      //   // 2. 요청 보낼 준비
+      //   xhr.open("GET", "http://localhost:3000/posts");
+
+      //   // 3. 컨텐츠 타입 설정(charset=utf-8)
+      //   xhr.setRequestHeader("content-type", "application/json");
+
+      //   // 4. 요청(request) 전송
+      //   xhr.send();
+
+      //   // 5. 응답(response) 함수
+      //   xhr.onload = () => {
+      //     if (xhr.status == 200) {
+      //       const result = JSON.parse(xhr.response);
+      //       console.log(result);  // 출력 => rendering()
+      //     } else {
+      //       console.log("error");
+      //       console.log(xhr.status, xhr.statusText);
+      //     }
+      //   };
+      // }
+
+      function getComments() {
+        const xhr = new XMLHttpRequest();
+
+        xhr.open("GET", "http://localhost:3000/comments");
+
+        xhr.setRequestHeader("content-type", "application/json");
+
+        xhr.send();
+
+        xhr.onload = () => {
+          if (xhr.status == 200) {
+            const result = JSON.parse(xhr.response);
+            console.log(result); // 출력 => rendering()
+          } else {
+            console.log("error");
+            console.log(xhr.status, xhr.statusText);
+          }
+        };
+      }
+
+      function getProfile() {
+        const xhr = new XMLHttpRequest();
+
+        xhr.open("GET", "http://localhost:3000/profile");
+
+        xhr.setRequestHeader("content-type", "application/json");
+
+        xhr.send();
+
+        xhr.onload = () => {
+          if (xhr.status == 200) {
+            const result = JSON.parse(xhr.response);
+            console.log(result); // 출력 => rendering()
+          } else {
+            console.log("error");
+            console.log(xhr.status, xhr.statusText);
+          }
+        };
+      }
+
+      function getData(endpoint) {
+        const xhr = new XMLHttpRequest();
+        const url = "http://localhost:3000/";
+
+        xhr.open("GET", `http://localhost:3000/${endpoint}`);
+
+        xhr.setRequestHeader("content-type", "application/json");
+
+        xhr.send();
+
+        xhr.onload = () => {
+          if (xhr.status == 200) {
+            const result = JSON.parse(xhr.response);
+            console.log(xhr.response); // 출력 => rendering()
+          } else {
+            console.log("error");
+            console.log(xhr.status, xhr.statusText);
+          }
+        };
+      }
+
+      /*
+        단점
+        1. 비동기 통신이므로 js의 실행 순서가 반드시 보장되지 않는다.
+        => send() 실행 후 결과 리턴을 기다리지 않고 다른 명령을 실행한다.
+        2. 결과의 화면 rendering을 재황용하기 어렵다.
+      */
+
+      // 2. XMLHttpRequest 객체를 이용하여 db를 생성
+      const postData = (target) => {
+        // 1. 객체 생성
+        const xhr = new XMLHttpRequest();
+
+        //2 요청 보낼 준비
+        xhr.open("POST", url + target);
+
+        //3. 컨텐츠 타입 설정(charset=utf-8)
+        xhr.setRequestHeader("content-type", "application/json");
+
+        //xhr.send();
+
+        const newData = { title: "2학년 1반", views: 10 };
+
+        // 4. 요청(request)
+        xhr.send(JSON.stringify(newData));
+
+        // 5. 응답(response)
+
+        xhr.onload = () => {
+          if (xhr.status == 200) {
+            const result = JSON.parse(xhr.response);
+            console.log(result); // 출력 => rendering()
+          } else {
+            console.log(result + "error");
+            console.log(xhr.status, xhr.statusText);
+          }
+        };
+      };
+
+      // 3. XMLHttpRequest 객체를 이용하여 db를 수정
+      const putData = (target, id) => {
+        // 1. 객체 생성
+        const xhr = new XMLHttpRequest();
+
+        //2 요청 보낼 준비
+        xhr.open("PUT", url + target + "/" + id);
+
+        //3. 컨텐츠 타입 설정(charset=utf-8)
+        xhr.setRequestHeader("content-type", "application/json");
+
+        //xhr.send();
+
+        const updateData = { title: "2학년 2반", views: 10000 };
+
+        // 4. 요청(request)
+        xhr.send(JSON.stringify(updateData));
+
+        // 5. 응답(response)
+
+        xhr.onload = () => {
+          if (xhr.status == 200) {
+            const result = JSON.parse(xhr.response);
+            console.log(result); // 출력 => rendering()
+          } else {
+            console.log("error");
+            console.log(xhr.status, xhr.statusText);
+          }
+        };
+      };
+
+      // 4. XMLHttpRequest 객체를 이용하여 db를 삭제
+      const deleteData = (target, id) => {
+        // 1. 객체 생성
+        const xhr = new XMLHttpRequest();
+
+        //2 요청 보낼 준비
+        xhr.open("DELETE", url + target + "/" + id);
+
+        //3. 컨텐츠 타입 설정(charset=utf-8)
+        xhr.setRequestHeader("content-type", "application/json");
+
+        // 4. 요청(request)
+        xhr.send();
+
+        // 5. 응답(response)
+
+        xhr.onload = () => {
+          if (xhr.status == 200) {
+            const result = JSON.parse(xhr.response);
+            console.log(result); // 출력 => rendering()
+          } else {
+            console.log("error");
+            console.log(xhr.status, xhr.statusText);
+          }
+        };
+      };
+
+      // getData("helloworld"); // status=404 / statusText="Not Found"
+
+      // getPosts();
+      // getComments();
+      // getProfile();
+
+      // getData();
+
+      getData("posts");
+      getData("comments");
+      getData("profile");
+
+      // postData("posts");
+      putData("posts", 1);
+      deleteData("posts", 1);
+    </script>
+  </body>
+</html>
