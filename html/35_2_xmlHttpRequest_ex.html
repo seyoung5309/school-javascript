@@ -16,6 +16,14 @@
         width: 150px;
         height: 50px;
       }
+      table {
+        border: 1px solid black;
+      }
+      td {
+        height: 30px;
+        width: 250px;
+        border: 1px solid black;
+      }
     </style>
   </head>
   <body>
@@ -35,16 +43,17 @@
     </div>
     <div id="postList">
       <h2>목록 결과</h2>
+      <table id="dataTable"></table>
     </div>
     <script>
       const url = "http://localhost:3000/";
 
       /*
-        1. 조회
-        2. 생성
-        3. 수정
-        4. 삭제
-        5. render
+        1. getData(): 전체 목록 조회
+        2. postData(): id는 상관없이, 나머지는 유효성 확인 
+        3. updateData(): id(o, x) 나머지는 즉시 반영 및 유효성
+        4. deleteData(): id를 가지고 삭제 
+        5. rendering(): 화면에 뿌리기 
         6. clear
       */
 
@@ -62,7 +71,7 @@
         xhr.onload = () => {
           if (xhr.status == 200) {
             const result = JSON.parse(xhr.response);
-            console.log(result); // 출력 => rendering()
+            rendering(result);
           } else {
             console.log("error");
             console.log(xhr.status, xhr.statusText);
@@ -93,7 +102,7 @@
         xhr.onload = () => {
           if (xhr.status == 200) {
             const result = JSON.parse(xhr.response);
-            render(result); // 출력 => rendering()
+            rendering(result);
           } else {
             console.log(result + "error");
             console.log(xhr.status, xhr.statusText);
@@ -124,7 +133,7 @@
         xhr.onload = () => {
           if (xhr.status == 200) {
             const result = JSON.parse(xhr.response);
-            console.log(result); // 출력 => rendering()
+            rendering(result);
           } else {
             console.log("error");
             console.log(xhr.status, xhr.statusText);
@@ -151,7 +160,7 @@
         xhr.onload = () => {
           if (xhr.status == 200) {
             const result = JSON.parse(xhr.response);
-            console.log(result); // 출력 => rendering()
+            rendering(result);
           } else {
             console.log("error");
             console.log(xhr.status, xhr.statusText);
@@ -159,9 +168,19 @@
         };
       };
 
-      const render = (datas) => {
-        console.log(datas);
-        let renderData;
+      const rendering = (datas) => {
+        //console.log(datas);
+        let renderData = [
+          `<tr><th>ID</th><th>Title</th><th>Views</th></tr>`,
+          "<tr>",
+        ];
+        for (let data of datas) {
+          renderData.push(
+            `<tr><td>${data.id}</td><td>${data.title}</td><td>${data.views}</td></tr>`,
+          );
+        }
+        renderData.push("</tr>");
+        document.getElementById("dataTable").innerHTML = renderData.join("");
       };
     </script>
   </body>
