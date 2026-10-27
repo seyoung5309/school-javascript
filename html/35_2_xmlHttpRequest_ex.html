@@ -87,8 +87,7 @@
         let title = document.getElementById("title").value;
         let view = document.getElementById("view").value;
         let newData = { id: id, title: title, views: view };
-        let sendData = [];
-        sendData.push(newData);
+        console.log(newData);
 
         if (!title) {
           alert("타이틀을 추가해 주세요.");
@@ -154,6 +153,12 @@
       // 3. 삭제
       const deleteData = (target) => {
         const xhr = new XMLHttpRequest();
+        let id = document.getElementById("id").value;
+
+        if (!id) {
+          alert("아이디를 입력해 주세요.");
+          return;
+        }
 
         xhr.open("DELETE", url + target + "/" + id);
         xhr.setRequestHeader("content-type", "application/json");
@@ -162,7 +167,7 @@
         xhr.onload = () => {
           if (xhr.status == 200) {
             const result = JSON.parse(xhr.response);
-            rendering(result);
+            getData();
           } else {
             console.log("error");
             console.log(xhr.status, xhr.statusText);
