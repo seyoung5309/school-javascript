@@ -38,7 +38,7 @@
     <div>
       <button id="getData" onclick="getData()">조회</button>
       <button id="postData" onclick="postData(`posts`)">추가</button>
-      <button id="updateData" onclick="updateData(`posts`)">수정</button>
+      <button id="updateData" onclick="putData(`posts`)">수정</button>
       <button id="deleteData" onclick="deleteData(`posts`)">삭제</button>
     </div>
     <div id="postList">
@@ -115,20 +115,35 @@
       };
 
       // 2. 수정
-      let putData = (target, id) => {
+      let putData = (target) => {
         const xhr = new XMLHttpRequest();
+        let id = document.getElementById("id").value;
+        let title = document.getElementById("title").value;
+        let view = document.getElementById("view").value;
+
+        if (!id) {
+          alert("아이디를 입력해 주세요.");
+          return;
+        }
+
+        if (title) {
+          updateData[title] = title;
+        }
+        if (views) {
+          updateData[views] = view;
+        }
 
         xhr.open("PUT", url + target + "/" + id);
         xhr.setRequestHeader("content-type", "application/json");
 
-        let newData = { id: id, title: title, views: view };
+        let updateData = { id: id };
 
         xhr.send(JSON.stringify(updateData));
 
         xhr.onload = () => {
           if (xhr.status == 200) {
             const result = JSON.parse(xhr.response);
-            rendering(result);
+            getData();
           } else {
             console.log("error");
             console.log(xhr.status, xhr.statusText);
@@ -137,7 +152,7 @@
       };
 
       // 3. 삭제
-      const deleteData = (target, id) => {
+      const deleteData = (target) => {
         const xhr = new XMLHttpRequest();
 
         xhr.open("DELETE", url + target + "/" + id);
