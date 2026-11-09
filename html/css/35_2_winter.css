@@ -1,0 +1,438 @@
+/* =========================================================
+   Winter Night — European Edition
+   35_2_xmlHttpRequest_ex.html
+   눈 내리는 겨울밤 배경 + 유럽 고서점/호텔 레터헤드 느낌의 카드
+   ========================================================= */
+
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Noto+Serif+KR:wght@400;600&family=Noto+Sans+KR:wght@400;500&display=swap");
+
+:root {
+  --night-top: #0b1a33;
+  --night-mid: #1c3a5e;
+  --night-low: #3b4f7a;
+
+  --ivory: #fbf7ef;
+  --paper: #f5eee1;
+  --ink: #1d2433;
+  --ink-soft: #545b6b;
+  --navy: #1f2f4a;
+  --navy-deep: #15213a;
+  --burgundy: #6e1f2a;
+  --gold: #b08d57;
+  --gold-light: #d8c08f;
+  --rule: #e3d6bf;
+
+  --serif-en: "Cormorant Garamond", "Noto Serif KR", Georgia, serif;
+  --serif-kr: "Noto Serif KR", "Cormorant Garamond", Georgia, serif;
+  --sans: "Noto Sans KR", "Malgun Gothic", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+}
+
+/* ---------- 배경: 겨울 밤하늘 + 아래쪽 따뜻한 불빛 (유지) ---------- */
+body {
+  margin: 0;
+  min-height: 100vh;
+  padding: 64px 16px 88px;
+  font-family: var(--sans);
+  color: var(--ink);
+  background:
+    radial-gradient(ellipse 80% 40% at 50% 105%, rgba(255, 166, 92, 0.55), transparent 70%),
+    radial-gradient(circle at 85% 12%, rgba(255, 250, 230, 0.35) 0 40px, transparent 41px),
+    radial-gradient(circle at 85% 12%, rgba(255, 240, 200, 0.18), transparent 160px),
+    linear-gradient(180deg, var(--night-top) 0%, var(--night-mid) 55%, var(--night-low) 100%);
+  background-attachment: fixed;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* ---------- 눈 내리는 효과 (유지) ---------- */
+body::before,
+body::after,
+html::before {
+  content: "";
+  position: fixed;
+  inset: -100% 0 0 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+body::before {
+  background-image:
+    radial-gradient(4px 4px at 20px 30px, #fff, transparent 60%),
+    radial-gradient(5px 5px at 120px 150px, #fff, transparent 60%),
+    radial-gradient(3px 3px at 210px 80px, #fff, transparent 60%),
+    radial-gradient(4px 4px at 300px 220px, #fff, transparent 60%),
+    radial-gradient(6px 6px at 380px 40px, rgba(255, 255, 255, 0.9), transparent 60%);
+  background-size: 420px 300px;
+  animation: snow-fall 14s linear infinite;
+  opacity: 0.9;
+  filter: blur(0.3px);
+}
+
+body::after {
+  background-image:
+    radial-gradient(2.5px 2.5px at 40px 60px, #fff, transparent 60%),
+    radial-gradient(3px 3px at 150px 20px, #fff, transparent 60%),
+    radial-gradient(2px 2px at 90px 180px, #fff, transparent 60%),
+    radial-gradient(3px 3px at 240px 120px, #fff, transparent 60%);
+  background-size: 280px 220px;
+  animation: snow-fall-sway 20s linear infinite;
+  opacity: 0.7;
+}
+
+html::before {
+  background-image:
+    radial-gradient(1.5px 1.5px at 10px 20px, #fff, transparent 60%),
+    radial-gradient(1.5px 1.5px at 70px 90px, #fff, transparent 60%),
+    radial-gradient(1px 1px at 130px 40px, #fff, transparent 60%),
+    radial-gradient(1.5px 1.5px at 160px 140px, #fff, transparent 60%);
+  background-size: 180px 160px;
+  animation: snow-fall 30s linear infinite;
+  opacity: 0.55;
+}
+
+@keyframes snow-fall {
+  from { transform: translateY(0); }
+  to   { transform: translateY(50%); }
+}
+
+@keyframes snow-fall-sway {
+  0%   { transform: translate(0, 0); }
+  25%  { transform: translate(15px, 12.5%); }
+  50%  { transform: translate(-10px, 25%); }
+  75%  { transform: translate(12px, 37.5%); }
+  100% { transform: translate(0, 50%); }
+}
+
+/* ---------- 메인 카드: 아이보리 레터헤드 + 금박 이중 테두리 ---------- */
+.winter-card {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 64px 56px 52px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.5), transparent 30%),
+    var(--ivory);
+  border-radius: 4px;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.6) inset,
+    0 30px 80px rgba(5, 12, 28, 0.55),
+    0 0 120px rgba(255, 170, 100, 0.12);
+  animation: card-in 1s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+/* 안쪽 금박 이중 테두리 */
+.winter-card::before {
+  content: "";
+  position: absolute;
+  inset: 14px;
+  border: 1px solid var(--gold);
+  outline: 1px solid rgba(176, 141, 87, 0.35);
+  outline-offset: 4px;
+  pointer-events: none;
+}
+
+@keyframes card-in {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.winter-card > div {
+  margin-bottom: 36px;
+}
+
+.winter-card > div:last-child {
+  margin-bottom: 0;
+}
+
+/* ---------- 제목: 세리프 + 장식 라벨 + 구분선 ---------- */
+.winter-card > div:first-child {
+  text-align: center;
+}
+
+h1 {
+  margin: 0;
+  font-family: var(--serif-kr);
+  font-weight: 600;
+  font-size: clamp(1.9rem, 4.5vw, 2.6rem);
+  letter-spacing: 0.02em;
+  color: var(--navy-deep);
+}
+
+/* 제목 위 작은 라벨 */
+h1::before {
+  content: "Winter Archive · MMXXVI";
+  display: block;
+  margin-bottom: 14px;
+  font-family: var(--serif-en);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 1rem;
+  letter-spacing: 0.18em;
+  color: var(--gold);
+}
+
+/* 제목 아래 장식 구분선 */
+h1::after {
+  content: "";
+  display: block;
+  width: 220px;
+  height: 14px;
+  margin: 20px auto 0;
+  background:
+    linear-gradient(var(--gold), var(--gold)) left center / 90px 1px no-repeat,
+    linear-gradient(var(--gold), var(--gold)) right center / 90px 1px no-repeat,
+    linear-gradient(45deg, transparent 42%, var(--gold) 42% 58%, transparent 58%) center / 10px 10px no-repeat,
+    linear-gradient(-45deg, transparent 42%, var(--gold) 42% 58%, transparent 58%) center / 10px 10px no-repeat;
+}
+
+h2 {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin: 0 0 18px;
+  font-family: var(--serif-kr);
+  font-weight: 600;
+  font-size: 1.3rem;
+  color: var(--navy-deep);
+}
+
+h2::before {
+  content: "No. 01";
+  font-family: var(--serif-en);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 1rem;
+  color: var(--gold);
+}
+
+h2::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--rule);
+  transform: translateY(-4px);
+}
+
+/* ---------- 입력창: 밑줄형 필드 ---------- */
+.winter-card > div:has(input) {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+input {
+  width: 100%;
+  height: 48px;
+  padding: 0 4px;
+  font-family: var(--sans);
+  font-size: 1rem;
+  color: var(--ink);
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #c9bba3;
+  border-radius: 0;
+  outline: none;
+  transition: border-color 0.3s, background-size 0.4s;
+  background-image: linear-gradient(var(--navy), var(--navy));
+  background-repeat: no-repeat;
+  background-position: left bottom;
+  background-size: 0% 2px;
+}
+
+input::placeholder {
+  font-family: var(--serif-en);
+  font-style: italic;
+  font-size: 1.1rem;
+  letter-spacing: 0.08em;
+  color: #9b9080;
+}
+
+input:focus {
+  border-bottom-color: transparent;
+  background-size: 100% 2px;
+}
+
+/* ---------- 버튼: 절제된 각진 버튼 ---------- */
+.winter-card > div:has(button) {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  padding-top: 8px;
+}
+
+button {
+  height: 50px;
+  font-family: var(--serif-kr);
+  font-weight: 600;
+  font-size: 0.98rem;
+  letter-spacing: 0.25em;
+  text-indent: 0.25em;
+  color: var(--navy);
+  background: transparent;
+  border: 1px solid var(--navy);
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background-color 0.25s, color 0.25s, border-color 0.25s, box-shadow 0.25s;
+}
+
+button:hover {
+  color: var(--ivory);
+  background: var(--navy);
+  box-shadow: 0 8px 20px rgba(21, 33, 58, 0.25);
+}
+
+button:active {
+  transform: translateY(1px);
+}
+
+button:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+/* 주 동작: 조회 */
+#getData {
+  color: var(--ivory);
+  background: var(--navy);
+}
+
+#getData:hover {
+  background: var(--navy-deep);
+  border-color: var(--navy-deep);
+}
+
+/* 위험 동작: 삭제 */
+#deleteData {
+  color: var(--burgundy);
+  border-color: var(--burgundy);
+}
+
+#deleteData:hover {
+  color: var(--ivory);
+  background: var(--burgundy);
+  box-shadow: 0 8px 20px rgba(110, 31, 42, 0.25);
+}
+
+/* ---------- 목록 테이블 ---------- */
+#postList {
+  padding-top: 8px;
+}
+
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  overflow: hidden;
+  box-shadow: 0 10px 24px rgba(29, 36, 51, 0.08);
+}
+
+table:empty {
+  display: none;
+}
+
+#postList:has(table:empty)::after {
+  content: "아직 불러온 데이터가 없습니다. 「조회」를 눌러 목록을 확인하세요.";
+  display: block;
+  padding: 36px 12px;
+  text-align: center;
+  font-family: var(--serif-kr);
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+  border: 1px dashed var(--rule);
+  background: var(--paper);
+}
+
+th {
+  padding: 16px 20px;
+  font-family: var(--serif-en);
+  font-weight: 600;
+  font-size: 1.05rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-align: left;
+  color: var(--gold-light);
+  background: var(--navy-deep);
+  border-bottom: 2px solid var(--gold);
+}
+
+td {
+  height: 52px;
+  padding: 0 20px;
+  border-bottom: 1px solid #efe6d6;
+  color: var(--ink);
+  transition: background 0.2s;
+}
+
+td:first-child {
+  width: 18%;
+  font-family: var(--serif-en);
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--gold);
+}
+
+td:last-child {
+  width: 20%;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-soft);
+}
+
+tr:nth-child(even) td {
+  background: #fcf9f3;
+}
+
+tr:hover td {
+  background: #f6efe2;
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+/* ---------- 모바일 ---------- */
+@media (max-width: 680px) {
+  body {
+    padding: 36px 12px 60px;
+  }
+  .winter-card {
+    padding: 48px 26px 36px;
+  }
+  .winter-card::before {
+    inset: 8px;
+  }
+  .winter-card > div:has(input) {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .winter-card > div:has(button) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  th,
+  td {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+}
+
+/* 움직임 줄이기 설정 존중 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after,
+  html::before {
+    animation: none !important;
+    transition: none !important;
+  }
+}
