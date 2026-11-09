@@ -125,17 +125,24 @@
           return;
         }
 
+        let updateData = { id: id };
+        console.log(updateData, title, view);
+
         if (title) {
-          updateData[title] = title;
+          updateData["title"] = title;
+        } else {
+          alert("타이틀을 입력해 주세요.");
+          return;
         }
-        if (views) {
-          updateData[views] = view;
+        if (view) {
+          updateData["views"] = view;
+        } else {
+          alert("조회수를 입력해 주세요.");
+          return;
         }
 
         xhr.open("PUT", url + target + "/" + id);
         xhr.setRequestHeader("content-type", "application/json");
-
-        let updateData = { id: id };
 
         xhr.send(JSON.stringify(updateData));
 
