@@ -9,24 +9,24 @@
   </head>
   <body>
     <main class="winter-card">
-    <div>
-      <h1>Posts 데이터 관리</h1>
-    </div>
-    <div>
-      <input type="text" name="" id="id" placeholder="id" />
-      <input type="text" name="" id="title" placeholder="title" />
-      <input type="text" name="" id="view" placeholder="view" />
-    </div>
-    <div>
-      <button id="getData" onclick="getData()">조회</button>
-      <button id="postData" onclick="postData(`posts`)">추가</button>
-      <button id="updateData" onclick="putData(`posts`)">수정</button>
-      <button id="deleteData" onclick="deleteData(`posts`)">삭제</button>
-    </div>
-    <div id="postList">
-      <h2>목록 결과</h2>
-      <table id="dataTable"></table>
-    </div>
+      <div>
+        <h1>Posts 데이터 관리</h1>
+      </div>
+      <div>
+        <input type="text" name="" id="id" placeholder="id" />
+        <input type="text" name="" id="title" placeholder="title" />
+        <input type="text" name="" id="view" placeholder="view" />
+      </div>
+      <div>
+        <button id="getData" onclick="getData()">조회</button>
+        <button id="postData" onclick="postData(`posts`)">추가</button>
+        <button id="updateData" onclick="putData(`posts`)">수정</button>
+        <button id="deleteData" onclick="deleteData(`posts`)">삭제</button>
+      </div>
+      <div id="postList">
+        <h2>목록 결과</h2>
+        <table id="dataTable"></table>
+      </div>
     </main>
     <script>
       const url = "http://localhost:3000/";
@@ -76,9 +76,7 @@
         const xhr = new XMLHttpRequest();
 
         xhr.open("GET", "http://localhost:3000/posts");
-
         xhr.setRequestHeader("content-type", "application/json");
-
         xhr.send();
 
         xhr.onload = () => {
@@ -129,7 +127,6 @@
 
         xhr.open("PUT", url + target + "/" + check.id);
         xhr.setRequestHeader("content-type", "application/json");
-
         xhr.send(JSON.stringify(check));
 
         xhr.onload = () => {
@@ -146,6 +143,7 @@
       // 3. 삭제
       const deleteData = (target) => {
         const xhr = new XMLHttpRequest();
+
         let id = document.getElementById("id").value;
 
         if (!id) {
