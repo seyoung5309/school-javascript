@@ -59,6 +59,36 @@
 
       // XMLHttpRequest 객체를 이용하여 db를 조회해보기
 
+      function checkData() {
+        let id = document.getElementById("id").value;
+        let title = document.getElementById("title").value;
+        let view = document.getElementById("view").value;
+
+        let newData = {};
+
+        if (!id) {
+          newData["message"] = "아이디를 입력해 주세요.";
+          return newData;
+        }
+
+        if (!title) {
+          newData["message"] = "타이틀을 추가해 주세요.";
+          return newData;
+        }
+        if (!view) {
+          newData["message"] = "조회수를 추가해 주세요.";
+          return newData;
+        }
+
+        newData["status"] = 1;
+        newData["message"] = "success";
+        newData["id"] = id;
+        newData["title"] = title;
+        newData["views"] = view;
+
+        return newData;
+      }
+
       function getData() {
         const xhr = new XMLHttpRequest();
 
@@ -83,24 +113,15 @@
       const postData = (target) => {
         const xhr = new XMLHttpRequest();
 
-        let id = document.getElementById("id").value;
-        let title = document.getElementById("title").value;
-        let view = document.getElementById("view").value;
-        let newData = { id: id, title: title, views: view };
-        console.log(newData);
-
-        if (!title) {
-          alert("타이틀을 추가해 주세요.");
-          return;
-        }
-        if (!view) {
-          alert("조회수를 추가해 주세요.");
+        let check = checkData();
+        if (!check.status) {
+          alert(check.message);
           return;
         }
 
         xhr.open("POST", url + target);
         xhr.setRequestHeader("content-type", "application/json");
-        xhr.send(JSON.stringify(newData));
+        xhr.send(JSON.stringify(check));
 
         xhr.onload = () => {
           if (xhr.status == 201) {
@@ -116,35 +137,17 @@
       // 2. 수정
       let putData = (target) => {
         const xhr = new XMLHttpRequest();
-        let id = document.getElementById("id").value;
-        let title = document.getElementById("title").value;
-        let view = document.getElementById("view").value;
 
-        if (!id) {
-          alert("아이디를 입력해 주세요.");
+        let check = checkData();
+        if (!check.status) {
+          alert(check.message);
           return;
         }
 
-        let updateData = { id: id };
-        console.log(updateData, title, view);
-
-        if (title) {
-          updateData["title"] = title;
-        } else {
-          alert("타이틀을 입력해 주세요.");
-          return;
-        }
-        if (view) {
-          updateData["views"] = view;
-        } else {
-          alert("조회수를 입력해 주세요.");
-          return;
-        }
-
-        xhr.open("PUT", url + target + "/" + id);
+        xhr.open("PUT", url + target + "/" + check.id);
         xhr.setRequestHeader("content-type", "application/json");
 
-        xhr.send(JSON.stringify(updateData));
+        xhr.send(JSON.stringify(check));
 
         xhr.onload = () => {
           if (xhr.status == 200) {
