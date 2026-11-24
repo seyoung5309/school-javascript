@@ -1,56 +1,14 @@
 {
   "posts": [
     {
-      "status": 1,
-      "message": "success",
-      "id": "1",
-      "title": "2",
-      "views": "4"
+      "title": "530",
+      "views": 530,
+      "id": "1"
     },
     {
-      "id": "rQLydkJailc",
-      "title": "2",
-      "views": "1"
-    },
-    {
-      "id": "Bgb1VYoRq-8",
-      "title": "45435",
-      "views": "123"
-    },
-    {
-      "status": 1,
-      "message": "success",
-      "id": "dDpvXf_mzTQ",
-      "title": "54",
-      "views": "43"
-    },
-    {
-      "status": 1,
-      "message": "success",
-      "id": "8jnAizN0kP8",
-      "title": "325",
-      "views": "346"
-    },
-    {
-      "status": 1,
-      "message": "success",
-      "id": "cBZ9BLhhZ2I",
-      "title": "2",
-      "views": "3"
-    },
-    {
-      "status": 1,
-      "message": "success",
-      "id": "PirXiHxIMQE",
-      "title": "23",
-      "views": "34"
-    },
-    {
-      "status": 1,
-      "message": "success",
-      "id": "7AwG7QhqwNk",
-      "title": "4324",
-      "views": "5345"
+      "title": "2학년 1반",
+      "views": 10000,
+      "id": "KWfIyIUdm6Q"
     }
   ],
   "comments": [
